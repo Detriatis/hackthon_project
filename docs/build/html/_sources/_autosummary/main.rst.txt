@@ -1,0 +1,32 @@
+﻿main
+====
+
+.. automodule:: main
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   main.graph_elements
+   main.testing
+
