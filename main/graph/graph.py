@@ -3,10 +3,29 @@ from nodes import SinkNode, SourceNode, Node
 from connections import Connection
 
 class Graph:
-    def __init__(self, directed = False):
+    def __init__(self, directed: bool = False):
+        '''
+        Construct a directed or undirected class
+
+        Attributes
+        ----------
+        nodes : dictionary
+            a dictionary of nodes added to the graph, indexed by the nodes name : str 
+        connections : list 
+            a list of connections between nodes in the graph : Connection
+        directed : bool
+            Indicate whether to make DAG or UAG 
+
+        Methods  
+        ----------
+        add_node / nodes: 
+            add a node or nodes to the graph 
+        
+        '''
         self.nodes = {}         # dict: node_id -> Node object
         self.connections = []   # list of Connection objects
         self.directed = directed
+        self.adjacency = {} 
 
     def add_node(self, node: Node):
         self.nodes[node.node_id] = node
@@ -16,6 +35,11 @@ class Graph:
             self.nodes[node.node_id] = node
         
     def add_connection(self, node_a_id, node_b_id, weight=1.0):
+        '''
+        Here node_a_id: Source Node
+        Here node_b_id: Destination Node
+        Weight: Parameter for loss over distance between nodes 
+        '''
         if node_a_id not in self.nodes or node_b_id not in self.nodes:
             raise ValueError("Node not found in graph.")
         node_a = self.nodes[node_a_id]
@@ -35,31 +59,23 @@ class Graph:
     def get_neighbors(self, node_id):
         """If you store adjacency in node.connections, just return the connected nodes."""
         return self.nodes.get(node_id).connections
-    
+
     def construct_adjacency(self):
-        adjacency_matrix = np.zeros((len(self.nodes), len(self.nodes)))
-        node_index = {} 
-        for i, (node_id, node) in enumerate(self.nodes.items()):
-            node_index[node_id] = i 
+        n = len(self.nodes)
+        adjacency_matrix = np.zeros((n, n))
+        
+        # Create an index mapping directly
+        node_index = {node_id: i for i, node_id in enumerate(self.nodes.keys())}
 
         for connection in self.connections:
-            node_a_id = connection.node_a.node_id
-            node_b_id = connection.node_b.node_id
-            
-            node_a_idx = node_index[node_a_id]
-            node_b_idx = node_index[node_b_id]
+            a, b = connection.node_a.node_id, connection.node_b.node_id
+            i, j = node_index[a], node_index[b]
 
-            if self.directed: 
-                if isinstance(connection.node_a, SourceNode):
-                    adjacency_matrix[node_a_idx, node_b_idx] = 1
-                else: 
-                    adjacency_matrix[node_b_idx, node_a_idx] = 1
-            
-            if not self.directed:
-                adjacency_matrix[node_b_idx, node_a_idx] = 1 
-                adjacency_matrix[node_a_idx, node_b_idx] = 1 
+            if self.directed:
+                adjacency_matrix[i, j] = 1 if isinstance(connection.node_a, SourceNode) else 0
+                adjacency_matrix[j, i] = 1 if not isinstance(connection.node_a, SourceNode) else 0
+            else:
+                adjacency_matrix[i, j] = adjacency_matrix[j, i] = 1 
 
         return adjacency_matrix, node_index
-
-            
-         
+    
