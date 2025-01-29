@@ -1,13 +1,21 @@
 from connections import Connection
-from sinks import Sink
-from sources import Source
+from nodes import SourceNode, SinkNode, Solar, Wind, Gas, Node
 from graph import Graph
 
 def main():
-    source = Source 
-    sink = Sink 
-    connector = Connection(Source, Sink) 
+    source_solar = Solar('solar1', '10', '10', '10') 
+    source_wind = Wind('wind1', '10', '10', '10')
+    sink = SinkNode('city1', '10', '10') 
+    graph = Graph(directed=True)
 
+    graph.add_node(sink)
+    graph.add_node(source_solar)
+    graph.add_node(source_wind)
+    graph.add_connection(source_solar.node_id, sink.node_id, weight=1)
+    graph.add_connection(source_wind.node_id, sink.node_id, weight=1)
 
+    adjacency, node_idx = graph.construct_adjacency()
+    print(adjacency) 
+    print(node_idx)
 if __name__ == '__main__': 
     main() 

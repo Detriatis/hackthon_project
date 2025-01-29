@@ -13,7 +13,7 @@ class SinkNode(Node):
         :param demand_profile: A list or function representing hourly power demand (MW)
         :param lcoe_requirement: Minimum required Levelized Cost of Electricity ($/MWh)
         """
-        super.__init__(node_id) 
+        super().__init__(node_id) 
         self.demand_profile = demand_profile
         self.lcoe_requirement = lcoe_requirement
     
@@ -36,7 +36,7 @@ class SourceNode(Node):
         :param lcoe: Levelized Cost of Electricity ($/MWh)
         :param deployment_time: Time required to deploy the 
         """
-        super.__init__(node_id)
+        super().__init__(node_id)
         self.power_output = power_output
         self.dispatchability = dispatchability
         self.co2_per_mw = co2_per_mw
