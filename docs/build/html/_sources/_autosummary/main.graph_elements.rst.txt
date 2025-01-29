@@ -1,0 +1,33 @@
+main.graph\_elements
+====================
+
+.. automodule:: main.graph_elements
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   main.graph_elements.connections
+   main.graph_elements.graph
+   main.graph_elements.nodes
+

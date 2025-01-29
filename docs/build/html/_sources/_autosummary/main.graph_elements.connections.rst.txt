@@ -1,0 +1,29 @@
+main.graph\_elements.connections
+================================
+
+.. automodule:: main.graph_elements.connections
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      Connection
+   
+   
+
+   
+   
+   
+
+
+
