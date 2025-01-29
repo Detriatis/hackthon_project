@@ -7,4 +7,4 @@ Power supply market optimisation
 
 ## Get started
 
-`flask --app ui/app run
+`flask --app ui/app run`
