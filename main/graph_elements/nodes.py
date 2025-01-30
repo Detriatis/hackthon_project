@@ -22,8 +22,9 @@ class Node:
         A list of the connected nodes by node_id 
     """
 
-    def __init__(self, node_id):
+    def __init__(self, node_id, cartesian_coordinates):
         self.node_id = node_id
+        self.cartesian_coordinates = cartesian_coordinates
         self.connections = []
         self.connections_ids = [] 
 
