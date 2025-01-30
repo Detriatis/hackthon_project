@@ -25,15 +25,12 @@ class Graph:
         A list of Connection objects between nodes.
     directed : bool
         Indicates whether the graph is directed.
-    adjacency : dict
-        (Optional) Dictionary for any adjacency structures or custom tracking.
     """
 
     def __init__(self, directed: bool = False):
         self.nodes = {}
         self.connections = []
         self.directed = directed
-        self.adjacency = {}
 
     def add_node(self, node: Node):
         """
