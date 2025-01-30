@@ -23,6 +23,7 @@ class SimulatorBase():
         Initial cost for infrastructure 
     """
     
+
     def __init__(self, time_range: int = 24): 
         self.time_range = time_range
         self.power_outputs = None
