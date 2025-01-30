@@ -4,9 +4,9 @@ from graph_elements.graph import Graph
 
 
 def main():
-    source_solar = Solar('solar1', 24, [0, 1]) 
-    source_wind = Wind('wind1', 24, [1, 0], offshore=True)
-    sink = SinkNode('city1', 24, [0, 0]) 
+    source_solar = Solar('solar1', 22, [0, 1]) 
+    source_wind = Wind('wind1', 22, [1, 0], offshore=True)
+    sink = SinkNode('city1', 22, [0, 0]) 
     graph = Graph(directed=True)
     
     # Adding a node to the graph, nodes are stored as key value pairs, where the
@@ -29,6 +29,9 @@ def main():
     # nodes also store all their connections as an attribute, if directed connections are only stored
     # as outgoing connections i.e. source nodes store connections but sink nodes generally wont
     id = node.connections[0].node_b.node_id
+
+    if isinstance(node, SourceNode): 
+        print(node.get_power_output_series())
 
 if __name__ == '__main__': 
     main() 

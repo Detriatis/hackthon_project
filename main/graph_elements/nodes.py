@@ -139,7 +139,12 @@ class SourceNode(Node):
     def get_lcoe_output(self, hour): 
 
         return self.simulator.get_cost_at_index(hour) 
-
+    
+    def get_power_output_series(self):
+        return self.simulator.power_outputs
+    
+    def get_lcoe_output_series(self): 
+        return self.simulator.cost_outputs
 
 class Solar(SourceNode):
     """
