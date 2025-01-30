@@ -19,11 +19,30 @@ class Node:
         The node's identifier.
     connections : list
         A list of connections leading from this node to other nodes.
+    connections_ids : list 
+        A list of the connected nodes by node_id 
     """
 
     def __init__(self, node_id):
         self.node_id = node_id
         self.connections = []
+        self.connections_ids = [] 
+
+    def set_connection(self, connection, node_id): 
+        """
+        Set the connection and connection_ids attribute of a node.
+
+        Parameters
+        ----------
+        connection : Connection
+            A connection object which defines the coefficient between two
+            connected nodes.
+        node_id : Hashable
+            A unique identifier for the node being connected to.
+        
+        """
+        self.connections.append(connection) 
+        self.connections_ids.append(node_id)
 
 
 class SinkNode(Node):
