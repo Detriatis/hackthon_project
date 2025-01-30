@@ -21,7 +21,7 @@ class GasPowerSimulator(SimulatorBase):
     def __init__(self, time_range):
         self.time_range = time_range
     
-    def gas_power_plant_output(self):
+    def power_output(self):
         """
         Calculate the hourly power output and cost of a gas power plant.
 
@@ -44,9 +44,13 @@ class GasPowerSimulator(SimulatorBase):
         
         cost_outputs = (power_outputs / 1000) * maintenance_cost_per_mwh
         
-        return peak_power, power_outputs, cost_outputs, capital_cost
+        self.power_outputs = power_outputs
+        self.capital_cost = capital_cost
+        self.cost_outputs = cost_outputs
+        self.peak_power = peak_power
+
     
-    def gas_power_plant_simulation(self):
+    def plot_data(self):
         """
         Simulate and plot the hourly power output and cost of a gas power plant.
 
@@ -58,12 +62,7 @@ class GasPowerSimulator(SimulatorBase):
             - cost_outputs (ndarray): Hourly maintenance costs in USD.
         """
         savepath = "../../data/figures/gaspowerplantoutputs.png"
-        peak_power, power_outputs, cost_outputs, capital_cost = self.gas_power_plant_output()
-        title = f'Hourly Power Output for {peak_power // 1000} MW Gas Power Plant'
+        title = f'Hourly Power Output for {self.peak_power // 1000} MW Gas Power Plant'
         label = 'Power output for gas power plant'
         self.plot_power_data(title, label=label, savepath=savepath)
-        self.power_outputs = power_outputs
-        self.capital_cost = capital_cost
-        self.cost_outputs = cost_outputs
 
-        return power_outputs, cost_outputs

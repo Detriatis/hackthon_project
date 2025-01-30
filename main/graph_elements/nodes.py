@@ -2,6 +2,9 @@
 This module contains various node definitions for an energy network.
 """
 import numpy as np 
+from simulations.gas import GasPowerSimulator
+from simulations.solar import SolarPowerSimulator
+from simulations.wind import WindPowerSimulator
 
 class Node:
     """
