@@ -2,4 +2,4 @@ initial_test.ipynb
 **/__pycache__/*
 .devcontainer
 __pycache__
-
+**/*.egg-info
