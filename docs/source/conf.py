@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Hackathon Project'
-copyright = '0, Michael Dodds, Oscar Hill, Stan Xio, Alex Higgins'
-author = 'Michael Dodds, Oscar Hill, Stan Xio, Alex Higgins'
+copyright = '0, Michael Dodds, Oscar Hill, Stan Xio, Alex Higginbottom'
+author = 'Michael Dodds, Oscar Hill, Stan Xio, Alex Higginbottom'
 release = '0'
 
 # -- General configuration ---------------------------------------------------
