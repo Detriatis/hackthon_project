@@ -17,8 +17,8 @@ def main():
     # When you add a connection you create a connection object, the method takes 
     # the node id you specified for each node. The connection object contains node_a - source node
     # and node_b - sink node. You also specify a weight which defines the coefficient for the power transmission
-    graph.add_connection(source_solar.node_id, sink.node_id, weight=0.25)
-    graph.add_connection(source_wind.node_id, sink.node_id, weight=1)
+    graph.add_connection(source_solar.node_id, sink.node_id)
+    graph.add_connection(source_wind.node_id, sink.node_id)
     # Calling construct adjacency will iterate all connections to return an adjacency array 
     # the array [i, j] is formatted so [i] is the source, and [j] is the sink
     # this function also returns a node index of key value pairs, where the key is the node id
