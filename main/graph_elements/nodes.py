@@ -65,12 +65,16 @@ class SinkNode(Node):
         if callable, called with an hour integer as the argument.
     lcoe_requirement : float
         Minimum required Levelized Cost of Electricity ($/MWh).
+    econ_coefficient : float 
+        The level of penality applied for economic loss when power supply is under demand.
     """
 
-    def __init__(self, node_id, time_range, cartesian_coordinates):
+    def __init__(self, node_id, time_range, cartesian_coordinates, econ_coefficient):
         super().__init__(node_id, time_range, cartesian_coordinates)
         self.simulator = SinkPowerDemandSimulator(time_range)
         self.simulator.power_demand()
+        self.econ_coefficient = econ_coefficient
+        self.demand_profile = self.simulator.hourly_demand
 
     def get_demand(self, hour):
         """
@@ -87,10 +91,7 @@ class SinkNode(Node):
             The demand in MW at the given hour.
         """
         
-        return self.simulator.get_power_at_index(hour) 
-    
-    def get_demand_series(self): 
-        return self.simulator.hourly_demand
+        return self.demand_profile[hour] 
     
     def node_type(self):
         return 'sink'
@@ -104,21 +105,8 @@ class SourceNode(Node):
     ----------
     node_id : Hashable
         A unique identifier for the source node.
-    power_output : list or callable
-        Hourly power output (MW). If a list, indexed by hour;
-        if callable, called with an hour integer as the argument.
-    dispatchability : float
-        A value in [0, 1] indicating how flexible the source is in adjusting output.
-    co2_per_mw : float
-        CO2 emissions per MW generated.
-    ramp_up_time : callable
-        A function defining how quickly the source can ramp up to full capacity.
-    capital_cost : float
-        Initial investment cost of the source.
     lcoe : float
         Levelized Cost of Electricity ($/MWh).
-    deployment_time : int or float
-        Time (in some unit, e.g., years) required to deploy the source.
     """
 
     def __init__(self, node_id, time_range, cartesian_coordinates):
@@ -126,33 +114,15 @@ class SourceNode(Node):
         super().__init__(node_id, time_range, cartesian_coordinates)
         self.simulator = SimulatorBase(time_range)
         self.simulator.power_output()
+        self.lcoe = self.simulator.power_outputs
+        self.total_power = self.simulator.cost_outputs
 
     def get_power_output(self, hour):
-        """
-        Returns the power output at a specified hour.
-
-        Parameters
-        ----------
-        hour : int
-            The hour for which to retrieve output.
-
-        Returns
-        -------
-        float
-            The power output (MW) at the given hour
-        """
-        return self.simulator.get_power_at_index(hour)
+        return self.total_power[hour]
 
     def get_lcoe_output(self, hour): 
-
-        return self.simulator.get_cost_at_index(hour) 
+        return self.lcoe[hour] 
     
-    def get_power_output_series(self):
-        return self.simulator.power_outputs
-    
-    def get_lcoe_output_series(self): 
-        return self.simulator.cost_outputs
-
 class Solar(SourceNode):
     """
     A solar power source node.
@@ -172,6 +142,7 @@ class Solar(SourceNode):
         super().__init__(name, time_range, cartesian_coordinates)
         self.simulator = SolarPowerSimulator(time_range)
         self.simulator.power_output()
+
 
 class Wind(SourceNode):
     """
@@ -217,5 +188,5 @@ class Gas(SourceNode):
     def __init__(self, name, time_range, cartesian_coordinates):
         super().__init__(name, time_range, cartesian_coordinates)
         self.simulator = GasPowerSimulator(time_range)
-        simulation = self.simulator.power_output()
+        self.simulator.power_output()
         
