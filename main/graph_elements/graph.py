@@ -79,7 +79,7 @@ class Graph:
 
         return source_nodes
     
-    def add_connection(self, node_a_id, node_b_id):
+    def add_connection(self, node_a_id, node_b_id, power_capacity):
         """
         Add a connection between two existing nodes in the graph.
 
@@ -107,7 +107,7 @@ class Graph:
         node_a = self.nodes[node_a_id]
         node_b = self.nodes[node_b_id]
 
-        connection = Connection(node_a, node_b)
+        connection = Connection(node_a, node_b, power_capacity)
         self.connections.append(connection)
 
         # Update adjacency in each node
