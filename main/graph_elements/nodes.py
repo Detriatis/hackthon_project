@@ -1,5 +1,4 @@
 """
-Test docstring (module-level).
 This module contains various node definitions for an energy network.
 """
 import numpy as np 

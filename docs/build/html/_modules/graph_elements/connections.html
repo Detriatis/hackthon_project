@@ -234,7 +234,7 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Contains the Functionality relating to managing the connections between two nodes.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">.nodes</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">.nodes</span> <span class="kn">import</span> <span class="n">Node</span><span class="p">,</span> <span class="n">SourceNode</span><span class="p">,</span> <span class="n">SinkNode</span>
 
 <div class="viewcode-block" id="Connection">
 <a class="viewcode-back" href="../../_autosummary/graph_elements.connections.html#graph_elements.connections.Connection">[docs]</a>
@@ -250,6 +250,8 @@
 <span class="sd">        The destination or second node.</span>
 <span class="sd">    weight : float, optional</span>
 <span class="sd">        A weight or capacity for this connection. Defaults to 1.0.</span>
+<span class="sd">    power_capacity: float, optional</span>
+<span class="sd">        A power limit for this connection. Defaults to 0.0</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -259,16 +261,36 @@
 <span class="sd">        The destination or second node of this connection.</span>
 <span class="sd">    weight : float</span>
 <span class="sd">        Weight or capacity assigned to this connection.</span>
+<span class="sd">    power_capacity: float</span>
+<span class="sd">        Power capacity of this connection.</span>
+<span class="sd">    power: float</span>
+<span class="sd">        Current power being channeled by connection.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_a</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">node_b</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_a</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">node_b</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">power_capacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">node_a</span> <span class="o">=</span> <span class="n">node_a</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">node_b</span> <span class="o">=</span> <span class="n">node_b</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">power_capacity</span> <span class="o">=</span> <span class="n">power_capacity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-    <span class="k">def</span> <span class="nf">transmit_power</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="n">response</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_a</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_b</span><span class="p">)</span></div>
-
+    <span class="k">def</span> <span class="nf">transmit_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_a</span><span class="o">.</span><span class="n">node_id</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="n">node_id</span><span class="p">:</span>
+            <span class="n">source_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_a</span> 
+            <span class="n">sink_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_b</span>
         
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_b</span><span class="o">.</span><span class="n">node_id</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="n">node_id</span><span class="p">:</span> 
+            <span class="n">source_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_b</span>
+            <span class="n">sink_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_a</span> 
+
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Node is not in the connection&#39;</span><span class="p">)</span>
+        
+        <span class="n">P</span> <span class="o">=</span> <span class="n">source_node</span><span class="o">.</span><span class="n">query_power</span><span class="p">(</span><span class="n">sink_node</span><span class="p">)</span>
+        <span class="n">sink_node</span><span class="o">.</span><span class="n">transmit_power</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">power</span> <span class="o">+=</span> <span class="n">P</span> 
+
+        <span class="k">return</span> <span class="n">P</span><span class="p">,</span> <span class="n">sink_node</span>        </div>
 
 </pre></div>
         </article>

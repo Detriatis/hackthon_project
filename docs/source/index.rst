@@ -5,9 +5,15 @@
 
 Welcome to the Hackathon Project documentation!
 ===============================================
-.. autosummary:: 
-   :toctree: _autosummary
-   :recursive:
+.. toctree:: 
+   :maxdepth: 2
+   :caption: Contents:
+
+   _autosummary/graph_elements
+   _autosummary/graph_elements.connections
+   _autosummary/graph_elements.graph
+   _autosummary/graph_elements.nodes
+
    
 
 Indices and tables
