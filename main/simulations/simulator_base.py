@@ -19,11 +19,12 @@ class SimulatorBase():
         Array of power output values over time range
     cost_outputs : np.array
         Array of the power costs over time range 
-    capital_costs : float 
+    capital_costs : int 
         Initial cost for infrastructure 
     """
     
-    def __init__(self, time_range: float = 24.00): 
+
+    def __init__(self, time_range: int = 24): 
         self.time_range = time_range
         self.power_outputs = None
         self.cost_outputs = None
@@ -68,7 +69,7 @@ class SimulatorBase():
         print(f'Hourly Power Output Array: {self.power_outputs}')
 
     @abstractmethod
-    def compute_output(self) -> tuple[np.array, np.array]:
+    def power_output(self) -> tuple[np.array, np.array]:
         """
         Compute the output for a given simulator
 

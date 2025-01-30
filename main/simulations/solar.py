@@ -19,7 +19,7 @@ class SolarPowerSimulator(SimulatorBase):
         hours : int, optional
             The number of hours for which power generation is simulated (default is 24).
         """
-        self.time_range = time_range
+        super().__init__(time_range)
        
     def power_output(self):
         """
@@ -34,6 +34,7 @@ class SolarPowerSimulator(SimulatorBase):
             - cost_outputs (ndarray): Hourly maintenance costs in USD.
             - capital_cost (float): Total capital cost in USD.
         """
+        self.hours = self.time_range
         peak_power = self.skewed_random(72, 840) * 1000  # Peak power in kW
         num_panels = int(peak_power / 0.4)  # Approximate assumption: 400W per panel
         
