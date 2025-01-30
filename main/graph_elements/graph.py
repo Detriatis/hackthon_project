@@ -174,3 +174,21 @@ class Graph:
                 adjacency_matrix[j, i] = w
 
         return adjacency_matrix, node_index
+
+    def power_dispersion_matrices(self): 
+        adjacency_matrix, node_index = self.construct_adjacency()
+        power_matrix = np.zeros_like(adjacency_matrix)
+        for node_id, i in node_index.values():
+            node = self.get_node(node_id) 
+            if isinstance(node, SourceNode): 
+                connections = node.connections
+            else: 
+                pass 
+
+            for connection in connections: 
+                p, sink_node = connection.transmit_power(node)
+                j = node_index[sink_node.node_id]
+                
+                power_matrix[i, j] = p
+
+        return power_matrix 

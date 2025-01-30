@@ -5,8 +5,8 @@
 
 Welcome to the Hackathon Project documentation!
 ===============================================
-.. autosummary:: 
-   :toctree: _autosummary
+.. toctree:: 
+   :levels: _autosummary
    :recursive:
    
 
