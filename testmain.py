@@ -99,13 +99,13 @@ class LargeGraph:
         #   demand_profile   = needed power each time step
         # We'll have 5 time steps (T=5)
         sink_nodes = [
-            Node(node_type="sink", econ_coefficient=4.0,
+            Node(node_type="sink", econ_coefficient=24.0,
                  demand_profile=[30, 35, 40, 25, 30]),
-            Node(node_type="sink", econ_coefficient=7.0,
+            Node(node_type="sink", econ_coefficient=27.0,
                  demand_profile=[20, 20, 20, 20, 20]),
-            Node(node_type="sink", econ_coefficient=5.5,
+            Node(node_type="sink", econ_coefficient=25.5,
                  demand_profile=[50, 60, 55, 60, 65]),
-            Node(node_type="sink", econ_coefficient=6.5,
+            Node(node_type="sink", econ_coefficient=26.5,
                  demand_profile=[10, 15, 10, 12, 10])
         ]
 
@@ -251,9 +251,11 @@ class GraphSolver:
 # -------------------------------------------------------------------------
 if __name__ == "__main__":
     # Create the simple graph
-    test_graph = SimpleGraph()
+    # test_graph = SimpleGraph()
+    test_graph = LargeGraph()
     # Create the solver instance with T=3 (matching demand profiles)
-    solver = GraphSolver(test_graph, T=3, epochs=1000)
+    # solver = GraphSolver(test_graph, T=3, epochs=1000)
+    solver = GraphSolver(test_graph, T=5, epochs=1000)
     # Solve the optimization problem
     final_allocation, losses = solver.solve()
 
