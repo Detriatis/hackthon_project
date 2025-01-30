@@ -19,7 +19,7 @@ class GasPowerSimulator(SimulatorBase):
     """
     
     def __init__(self, time_range):
-        self.time_range = time_range
+        super().__init__(time_range) 
     
     def power_output(self):
         """
@@ -34,6 +34,8 @@ class GasPowerSimulator(SimulatorBase):
             - cost_outputs (ndarray): Hourly maintenance costs in USD.
             - capital_cost (float): Total capital cost in USD.
         """
+        self.hours = self.time_range
+
         peak_power = self.skewed_random(410, 2200) * 1000  # Peak power in kW
         
         # Gas plants provide steady power with minimal variation

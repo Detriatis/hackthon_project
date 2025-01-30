@@ -38,7 +38,7 @@ class WindPowerSimulator(SimulatorBase):
             - cost_outputs (ndarray): Hourly maintenance costs in USD.
             - capital_cost (float): Total capital cost in USD.
         """
-        hours = self.hours 
+        hours = self.time_range 
         num_turbines = self.skewed_random(20, 150)
         wind_speeds = np.clip(np.random.normal(8, 2, hours), 0, None)
         power_outputs = np.zeros(hours)

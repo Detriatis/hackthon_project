@@ -1,11 +1,12 @@
-def main():
-    from graph_elements.connections import Connection 
-    from graph_elements.nodes import SourceNode, SinkNode, Solar, Wind, Gas, Node
-    from graph_elements.graph import Graph
+from graph_elements.connections import Connection 
+from graph_elements.nodes import SourceNode, SinkNode, Solar, Wind, Gas, Node
+from graph_elements.graph import Graph
 
-    source_solar = Solar('solar1', '10', '10', '10') 
-    source_wind = Wind('wind1', '10', '10', '10')
-    sink = SinkNode('city1', '10', '10') 
+
+def main():
+    source_solar = Solar('solar1', 24, [0, 1]) 
+    source_wind = Wind('wind1', 24, [1, 0], offshore=True)
+    sink = SinkNode('city1', 24, [0, 0]) 
     graph = Graph(directed=True)
     
     # Adding a node to the graph, nodes are stored as key value pairs, where the

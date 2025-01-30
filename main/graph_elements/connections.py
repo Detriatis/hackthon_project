@@ -2,7 +2,8 @@
 Contains the Functionality relating to managing the connections between two nodes.
 """
 from .nodes import Node, SourceNode, SinkNode
-from scipy.spatial.distance import cdist
+from scipy.spatial.distance import euclidean
+import numpy as np 
 
 class Connection:
     """
@@ -36,7 +37,7 @@ class Connection:
     def __init__(self, node_a: Node, node_b: Node, power_capacity: float = 0.0):
         self.node_a = node_a
         self.node_b = node_b
-        self.weight = cdist(node_a.cartesian_coordinates, node_b.cartesian_coordinates)
+        self.weight = euclidean(np.array(node_a.cartesian_coordinates), np.array(node_b.cartesian_coordinates))
         self.power_capacity = power_capacity
         self.power = 0.0
 

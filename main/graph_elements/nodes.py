@@ -2,9 +2,11 @@
 This module contains various node definitions for an energy network.
 """
 import numpy as np 
+from abc import abstractmethod
 from simulations.gas import GasPowerSimulator
 from simulations.solar import SolarPowerSimulator
 from simulations.wind import WindPowerSimulator
+from simulations.simulator_base import SimulatorBase
 
 class Node:
     """
@@ -25,8 +27,9 @@ class Node:
         A list of the connected nodes by node_id 
     """
 
-    def __init__(self, node_id, cartesian_coordinates):
+    def __init__(self, node_id, time_range, cartesian_coordinates):
         self.node_id = node_id
+        self.time_range = time_range
         self.cartesian_coordinates = cartesian_coordinates
         self.connections = []
         self.connections_ids = [] 
@@ -63,10 +66,8 @@ class SinkNode(Node):
         Minimum required Levelized Cost of Electricity ($/MWh).
     """
 
-    def __init__(self, node_id, demand_profile, lcoe_requirement):
-        super().__init__(node_id)
-        self.demand_profile = demand_profile
-        self.lcoe_requirement = lcoe_requirement
+    def __init__(self, node_id, time_range, cartesian_coordinates):
+        super().__init__(node_id, time_range, cartesian_coordinates)
 
     def get_demand(self, hour):
         """
@@ -113,16 +114,11 @@ class SourceNode(Node):
         Time (in some unit, e.g., years) required to deploy the source.
     """
 
-    def __init__(self, node_id, power_output, dispatchability, co2_per_mw,
-                 ramp_up_time, capital_cost, lcoe, deployment_time):
-        super().__init__(node_id)
-        self.power_output = power_output
-        self.dispatchability = dispatchability
-        self.co2_per_mw = co2_per_mw
-        self.ramp_up_time = ramp_up_time
-        self.capital_cost = capital_cost
-        self.lcoe = lcoe
-        self.deployment_time = deployment_time
+    def __init__(self, node_id, time_range, cartesian_coordinates):
+        
+        super().__init__(node_id, time_range, cartesian_coordinates)
+        self.simulator = SimulatorBase(time_range)
+        self.simulator.power_output()
 
     def get_power_output(self, hour):
         """
@@ -136,13 +132,13 @@ class SourceNode(Node):
         Returns
         -------
         float
-            The power output (MW) at the given hour.
+            The power output (MW) at the given hour
         """
-        if isinstance(self.power_output, list):
-            return self.power_output[hour]
-        else:
-            return self.power_output(hour) 
-        
+        return self.simulator.get_power_at_index(hour)
+
+    def get_lcoe_output(self, hour): 
+
+        return self.simulator.get_cost_at_index(hour) 
 
 
 class Solar(SourceNode):
@@ -160,15 +156,10 @@ class Solar(SourceNode):
     lcoe : float
         Levelized Cost of Electricity ($/MWh) for solar.
     """
-    def __init__(self, name, power_output, capital_cost, lcoe):
-        super().__init__(name, power_output,
-                         dispatchability=0,
-                         co2_per_mw=0,
-                         ramp_up_time=lambda x: 0,
-                         capital_cost=capital_cost,
-                         lcoe=lcoe,
-                         deployment_time=2)
-
+    def __init__(self, name, time_range, cartesian_coordinates):
+        super().__init__(name, time_range, cartesian_coordinates)
+        self.simulator = SolarPowerSimulator(time_range)
+        self.simulator.power_output()
 
 class Wind(SourceNode):
     """
@@ -185,14 +176,11 @@ class Wind(SourceNode):
     lcoe : float
         Levelized Cost of Electricity ($/MWh) for wind.
     """
-    def __init__(self, name, power_output, capital_cost, lcoe):
-        super().__init__(name, power_output,
-                         dispatchability=0.2,
-                         co2_per_mw=0,
-                         ramp_up_time=lambda x: 0,
-                         capital_cost=capital_cost,
-                         lcoe=lcoe,
-                         deployment_time=3)
+    def __init__(self, name, time_range, cartesian_coordinates, offshore):
+        super().__init__(name, time_range, cartesian_coordinates)
+        self.simulator = WindPowerSimulator(time_range, offshore)
+        self.simulator.power_output()
+
 
 
 class Gas(SourceNode):
@@ -214,12 +202,7 @@ class Gas(SourceNode):
     lcoe : float
         Levelized Cost of Electricity ($/MWh) for gas.
     """
-    def __init__(self, name, power_output, co2_per_mw, ramp_up_time,
-                 capital_cost, lcoe):
-        super().__init__(name, power_output,
-                         dispatchability=1,
-                         co2_per_mw=co2_per_mw,
-                         ramp_up_time=ramp_up_time,
-                         capital_cost=capital_cost,
-                         lcoe=lcoe,
-                         deployment_time=1)
+    def __init__(self, name, time_range):
+        super().__init__(name)
+        self.simulator = GasPowerSimulator(time_range)
+        simulation = self.init_simulation()

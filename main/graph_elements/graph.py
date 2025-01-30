@@ -182,7 +182,7 @@ class Graph:
             a_id = connection.node_a.node_id
             b_id = connection.node_b.node_id
             i, j = node_index[a_id], node_index[b_id]
-
+            print(w) 
             if self.directed:
                 # Optional logic for directed weighting
                 adjacency_matrix[i, j] = w if isinstance(connection.node_a, SourceNode) else 0
