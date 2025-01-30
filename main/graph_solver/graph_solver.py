@@ -1,14 +1,20 @@
 import torch.optim as optim
 import matplotlib.pyplot as plt
 import torch
+from graph_elements.nodes import Node, SourceNode, SinkNode
+from graph_elements.graph import Graph 
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 class GraphSolver:
-    def __init__(self, graph, T=3, epochs=1000, lambda_n=100):
-        self.graph = graph
+    def __init__(self, graph: Graph, T=3, epochs=1000, lambda_n=100):
+        self.graph: Graph = graph
         self.epochs = epochs
 
+        #### TODO this is incorrect: The shape is actually (S + D, S + D) as we made the assumption
+        #### That all nodes could, in theory, connect to any other node. So either we need to change
+        #### the construct adjacency function or the shape this code expects
         # 1) Construct adjacency
         adj, _ = self.graph.construct_adjacency()  # shape (S, D)
         self.matrix_distance = adj
@@ -40,18 +46,18 @@ class GraphSolver:
 
 
 
-    def _build_node_tensors(self, graph):
+    def _build_node_tensors(self):
         # for demonstration, collect S sources and D sinks
         self.list_total_power = []
         self.list_lcoe = []
         self.list_econ_coefficient = []
         self.list_demand_profile = []
-
-        for node in graph.nodes:
-            if node.node_type == "source":
+        
+        for node in self.graph.nodes.values():
+            if isinstance(node, SourceNode):
                 self.list_total_power.append(node.total_power)
                 self.list_lcoe.append(node.lcoe)
-            elif node.node_type == "sink":
+            elif isinstance(node, SinkNode):
                 self.list_econ_coefficient.append(node.econ_coefficient)
                 self.list_demand_profile.append(node.demand_profile)
 

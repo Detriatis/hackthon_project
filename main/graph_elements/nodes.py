@@ -66,7 +66,7 @@ class SinkNode(Node):
     lcoe_requirement : float
         Minimum required Levelized Cost of Electricity ($/MWh).
     econ_coefficient : float 
-        The level of penality applied for economic loss when power supply is under demand.
+        The level of penality applied for economic loss when power supply is under demand
     """
 
     def __init__(self, node_id, time_range, cartesian_coordinates, econ_coefficient):
@@ -74,7 +74,7 @@ class SinkNode(Node):
         self.simulator = SinkPowerDemandSimulator(time_range)
         self.simulator.power_demand()
         self.econ_coefficient = econ_coefficient
-        self.demand_profile = self.simulator.hourly_demand
+        self.demand_profile = self.get_demand_series()
 
     def get_demand(self, hour):
         """
@@ -91,7 +91,10 @@ class SinkNode(Node):
             The demand in MW at the given hour.
         """
         
-        return self.demand_profile[hour] 
+        return self.simulator.get_power_at_index(hour) 
+    
+    def get_demand_series(self): 
+        return self.simulator.hourly_demand
     
     def node_type(self):
         return 'sink'
@@ -114,8 +117,8 @@ class SourceNode(Node):
         super().__init__(node_id, time_range, cartesian_coordinates)
         self.simulator = SimulatorBase(time_range)
         self.simulator.power_output()
-        self.lcoe = self.simulator.power_outputs
-        self.total_power = self.simulator.cost_outputs
+        self.lcoe = self.get_lcoe_output_series()
+        self.total_power = self.get_power_output_series()
 
     def get_power_output(self, hour):
         return self.total_power[hour]
@@ -123,6 +126,12 @@ class SourceNode(Node):
     def get_lcoe_output(self, hour): 
         return self.lcoe[hour] 
     
+    def get_power_output_series(self):
+        return self.simulator.power_outputs
+    
+    def get_lcoe_output_series(self): 
+        return self.simulator.cost_outputs
+
 class Solar(SourceNode):
     """
     A solar power source node.

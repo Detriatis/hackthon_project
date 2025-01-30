@@ -7,7 +7,7 @@ def main():
     source_solar = Solar('solar1', 24, [0, 1]) 
     source_wind = Wind('wind1', 24, [1, 0], offshore=True)
     source_gas = Gas('gas1', 24, [1, 1])
-    sink = SinkNode('city1', 24, [0, 0]) 
+    sink = SinkNode('city1', 24, [0, 0], 10) 
     graph = Graph(directed=True)
     
     # Adding a node to the graph, nodes are stored as key value pairs, where the
@@ -38,7 +38,7 @@ def main():
             power_series = node.get_power_output_series()
             print(node_id, power_series)
         if isinstance(node, SinkNode):
-            demand_series = node.get_demand_series()
+            demand_series = node.demand_profile
             print(node_id, demand_series)
             
     assert len(power_series) == len(demand_series)
