@@ -79,7 +79,11 @@ class SimulatorBase():
             and associated power cost  
         """
         return 
-    
-     
+
+    def get_cost_at_index(self, hour: int):
+        return self.cost_outputs[hour]
+
+    def get_power_at_index(self, hour: int): 
+        return self.power_outputs[hour]
 
         

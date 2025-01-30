@@ -63,6 +63,22 @@ class Graph:
         for node in nodes:
             self.nodes[node.node_id] = node
 
+    def get_sinks(self): 
+        sink_nodes = [] 
+        for node in self.nodes: 
+            if isinstance(node, SinkNode):
+                sink_nodes.append(node)
+
+        return sink_nodes
+
+    def get_sources(self): 
+        source_nodes = []
+        for node in self.nodes: 
+            if isinstance(node, SourceNode):
+                source_nodes.append(node) 
+
+        return source_nodes
+    
     def add_connection(self, node_a_id, node_b_id, weight=1.0):
         """
         Add a connection between two existing nodes in the graph.

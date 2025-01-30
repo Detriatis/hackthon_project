@@ -21,7 +21,7 @@ class SolarPowerSimulator(SimulatorBase):
         """
         self.time_range = time_range
        
-    def solar_farm_output(self):
+    def power_output(self):
         """
         Calculate the hourly power output and cost of a solar farm.
 
@@ -48,10 +48,13 @@ class SolarPowerSimulator(SimulatorBase):
         maintenance_cost_per_mwh = 5  # Example: $5 per MWh
         
         cost_outputs = (power_outputs / 1000) * maintenance_cost_per_mwh
-        
-        return num_panels, power_outputs, cost_outputs, capital_cost
+
+        self.num_panels = num_panels 
+        self.power_outputs = power_outputs
+        self.cost_outputs = cost_outputs
+        self.capital_cost = capital_cost 
     
-    def solar_farm_simulation(self):
+    def plot_data(self):
         """
         Simulate and plot the hourly power output and cost of a solar farm.
 
@@ -63,9 +66,7 @@ class SolarPowerSimulator(SimulatorBase):
             - cost_outputs (ndarray): Hourly maintenance costs in USD.
         """
         savepath = '../../data/figures'
-        num_panels, power_outputs, cost_outputs, capital_cost = self.solar_farm_output()
-        title = f'Hourly Power Output for {num_panels} Panel Solar Farm'
+        title = f'Hourly Power Output for {self.num_panels} Panel Solar Farm'
         label = 'Hourly power output for panel solar farm'
         self.plot_power_data(title=title, label=label, savepath=savepath)
 
-        return power_outputs, cost_outputs

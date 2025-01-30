@@ -2,6 +2,9 @@
 This module contains various node definitions for an energy network.
 """
 import numpy as np 
+from simulations.gas import GasPowerSimulator
+from simulations.solar import SolarPowerSimulator
+from simulations.wind import WindPowerSimulator
 
 class Node:
     """
@@ -83,6 +86,8 @@ class SinkNode(Node):
             return self.demand_profile[hour]
         else:
             return self.demand_profile(hour)
+    def node_type(self):
+        return 'sink'
 
 
 class SourceNode(Node):
@@ -139,6 +144,8 @@ class SourceNode(Node):
             return self.power_output[hour]
         else:
             return self.power_output(hour) 
+    def node_type(self):
+        return 'source'
         
 
 
