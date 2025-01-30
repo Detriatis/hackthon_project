@@ -1,13 +1,66 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Energy Market Optimisation</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  </head>
-  <body>
-    <img style="width:100%;" src={{url_for('static', filename='powerstation.webp')}} />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Network Graph</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        svg { width: 100vw; height: 100vh; background-color: #f8f8f8; }
+        .link { stroke: #999; stroke-opacity: 0.6; }
+        .node text { font-size: 12px; text-anchor: middle; }
+        .node image { pointer-events: none; }
+    </style>
+</head>
+<body>
+    <svg></svg>
+    <script>
+        const graphData = JSON.parse('{{ graph_data | safe }}');
+
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const svg = d3.select("svg");
+
+        const simulation = d3.forceSimulation(graphData.nodes)
+            .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(100))
+            .force("charge", d3.forceManyBody().strength(-300))
+            .force("center", d3.forceCenter(width / 2, height / 2));
+
+        const link = svg.append("g")
+            .selectAll("line")
+            .data(graphData.links)
+            .enter().append("line")
+            .attr("class", "link")
+            .attr("stroke-width", d => d.power / 50);
+
+        const node = svg.append("g")
+            .selectAll("g")
+            .data(graphData.nodes)
+            .enter().append("g");
+
+        node.append("image")
+            .attr("xlink:href", d => d.image)
+            .attr("width", 40)
+            .attr("height", 40)
+            .attr("x", -20)
+            .attr("y", -20);
+
+        node.append("text")
+            .text(d => d.id)
+            .attr("dy", 30)
+            .attr("text-anchor", "middle");
+
+        simulation.on("tick", () => {
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            node
+                .attr("transform", d => `translate(${d.x}, ${d.y})`);
+        });
+    </script>
+</body>
 </html>
