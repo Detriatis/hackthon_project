@@ -21,7 +21,7 @@ class SinkPowerDemandSimulator(SimulatorBase):
 
     def power_demand(self):
         """
-        Generate the hourly power demand levels with a correctly oriented duck curve.
+        Generate the hourly power demand levels
 
         Returns
         -------
@@ -36,6 +36,7 @@ class SinkPowerDemandSimulator(SimulatorBase):
             "Scotland": 24_976, "Wales": 13_524, "England": 232_927, "Great Britain": 274_801
         }
         
+        #data: https://assets.publishing.service.gov.uk/media/5a7ca608e5274a2f304ef341/Sub-national_electricity_consumption_factsheet_2012.pdf
         # Step 1: Select a random region
         region = random.choice(list(annual_demand_gwh.keys()))
         
