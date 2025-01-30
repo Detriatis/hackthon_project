@@ -85,10 +85,12 @@ class SinkNode(Node):
         float
             The demand in MW at the given hour.
         """
-        if isinstance(self.demand_profile, list):
-            return self.demand_profile[hour]
-        else:
-            return self.demand_profile(hour)
+        
+        return self.simulator.get_power_at_index(hour) 
+    
+    def get_demand_series(self): 
+        return self.simulator.hourly_demand
+    
     def node_type(self):
         return 'sink'
 
