@@ -86,6 +86,8 @@ class SinkNode(Node):
             return self.demand_profile[hour]
         else:
             return self.demand_profile(hour)
+    def node_type(self):
+        return 'sink'
 
 
 class SourceNode(Node):
@@ -142,6 +144,8 @@ class SourceNode(Node):
             return self.power_output[hour]
         else:
             return self.power_output(hour) 
+    def node_type(self):
+        return 'source'
         
 
 
