@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="graph_elements.graph" href="graph_elements.graph.html" /><link rel="prev" title="graph_elements" href="graph_elements.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
         <title>graph_elements.connections - Hackathon Project 0 documentation</title>
@@ -198,7 +198,19 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="graph_elements.html">graph_elements</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of graph_elements</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">graph_elements.connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graph_elements.graph.html">graph_elements.graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graph_elements.nodes.html">graph_elements.nodes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">graph_elements.connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_elements.graph.html">graph_elements.graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_elements.nodes.html">graph_elements.nodes</a></li>
+</ul>
+
 </div>
 </div>
 
@@ -242,7 +254,7 @@
 <p>Contains the Functionality relating to managing the connections between two nodes.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="graph_elements.connections.Connection">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">graph_elements.connections.</span></span><span class="sig-name descname"><span class="pre">Connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="graph_elements.nodes.html#graph_elements.nodes.Node" title="graph_elements.nodes.Node"><span class="pre">Node</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="graph_elements.nodes.html#graph_elements.nodes.Node" title="graph_elements.nodes.Node"><span class="pre">Node</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_elements/connections.html#Connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_elements.connections.Connection" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">graph_elements.connections.</span></span><span class="sig-name descname"><span class="pre">Connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="graph_elements.nodes.html#graph_elements.nodes.Node" title="graph_elements.nodes.Node"><span class="pre">Node</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="graph_elements.nodes.html#graph_elements.nodes.Node" title="graph_elements.nodes.Node"><span class="pre">Node</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">power_capacity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_elements/connections.html#Connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_elements.connections.Connection" title="Link to this definition">¶</a></dt>
 <dd><p>A connection (edge) between two nodes in a graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -250,6 +262,7 @@
 <li><p><strong>node_a</strong> (<a class="reference internal" href="graph_elements.nodes.html#graph_elements.nodes.Node" title="graph_elements.nodes.Node"><em>Node</em></a>) – The source or first node.</p></li>
 <li><p><strong>node_b</strong> (<a class="reference internal" href="graph_elements.nodes.html#graph_elements.nodes.Node" title="graph_elements.nodes.Node"><em>Node</em></a>) – The destination or second node.</p></li>
 <li><p><strong>weight</strong> (<em>float</em><em>, </em><em>optional</em>) – A weight or capacity for this connection. Defaults to 1.0.</p></li>
+<li><p><strong>power_capacity</strong> (<em>float</em><em>, </em><em>optional</em>) – A power limit for this connection. Defaults to 0.0</p></li>
 </ul>
 </dd>
 </dl>
@@ -286,6 +299,28 @@
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_elements.connections.Connection.power_capacity">
+<span class="sig-name descname"><span class="pre">power_capacity</span></span><a class="headerlink" href="#graph_elements.connections.Connection.power_capacity" title="Link to this definition">¶</a></dt>
+<dd><p>Power capacity of this connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="graph_elements.connections.Connection.power">
+<span class="sig-name descname"><span class="pre">power</span></span><a class="headerlink" href="#graph_elements.connections.Connection.power" title="Link to this definition">¶</a></dt>
+<dd><p>Current power being channeled by connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -295,8 +330,26 @@
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="graph_elements.graph.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">graph_elements.graph</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="graph_elements.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">graph_elements</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -332,6 +385,8 @@
 <li><a class="reference internal" href="#graph_elements.connections.Connection.node_a"><code class="docutils literal notranslate"><span class="pre">Connection.node_a</span></code></a></li>
 <li><a class="reference internal" href="#graph_elements.connections.Connection.node_b"><code class="docutils literal notranslate"><span class="pre">Connection.node_b</span></code></a></li>
 <li><a class="reference internal" href="#graph_elements.connections.Connection.weight"><code class="docutils literal notranslate"><span class="pre">Connection.weight</span></code></a></li>
+<li><a class="reference internal" href="#graph_elements.connections.Connection.power_capacity"><code class="docutils literal notranslate"><span class="pre">Connection.power_capacity</span></code></a></li>
+<li><a class="reference internal" href="#graph_elements.connections.Connection.power"><code class="docutils literal notranslate"><span class="pre">Connection.power</span></code></a></li>
 </ul>
 </li>
 </ul>

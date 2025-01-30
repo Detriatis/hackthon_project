@@ -1,12 +1,8 @@
-'''
-Test Docstring
-'''
-
-from graph_elements.connections import Connection 
-from graph_elements.nodes import SourceNode, SinkNode, Solar, Wind, Gas, Node
-from graph_elements.graph import Graph
-
 def main():
+    from graph_elements.connections import Connection 
+    from graph_elements.nodes import SourceNode, SinkNode, Solar, Wind, Gas, Node
+    from graph_elements.graph import Graph
+
     source_solar = Solar('solar1', '10', '10', '10') 
     source_wind = Wind('wind1', '10', '10', '10')
     sink = SinkNode('city1', '10', '10') 

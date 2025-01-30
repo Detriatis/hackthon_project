@@ -95,11 +95,13 @@ class Graph:
         self.connections.append(connection)
 
         # Update adjacency in each node
-        node_a.connections.append(connection)
+        node_a.set_connection(connection, node_b_id)
+        
         if not self.directed:
             # In undirected graphs, we also record the connection on node_b
-            node_b.connections.append(connection)
-
+            node_b.set_connection(connection, node_a_id)
+            
+        
     def get_node(self, node_id: str) -> Node:
         """
         Retrieve a node object by its ID.

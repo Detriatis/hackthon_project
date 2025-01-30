@@ -2,6 +2,7 @@
 Contains the Functionality relating to managing the connections between two nodes.
 """
 from .nodes import Node, SourceNode, SinkNode
+from scipy.spatial.distance import cdist
 
 class Connection:
     """
@@ -32,10 +33,10 @@ class Connection:
         Current power being channeled by connection.
     """
 
-    def __init__(self, node_a: Node, node_b: Node, weight: float = 1.0, power_capacity: float = 0.0):
+    def __init__(self, node_a: Node, node_b: Node, power_capacity: float = 0.0):
         self.node_a = node_a
         self.node_b = node_b
-        self.weight = weight
+        self.weight = cdist(node_a.cartesian_coordinates, node_b.cartesian_coordinates)
         self.power_capacity = power_capacity
         self.power = 0.0
 
