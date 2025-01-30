@@ -34,9 +34,9 @@ class SimpleGraph:
         self.nodes = [
             Node(node_type="source", total_power=50.0, lcoe=10.0),
             Node(node_type="source", total_power=30.0, lcoe=8.0),
-            Node(node_type="sink", econ_coefficient=5.0,
+            Node(node_type="sink", econ_coefficient=25.0,
                  demand_profile=[20.0, 25.0, 15.0]),  # T=3 steps
-            Node(node_type="sink", econ_coefficient=6.0,
+            Node(node_type="sink", econ_coefficient=36.0,
                  demand_profile=[15.0, 20.0, 10.0])   # T=3 steps
         ]
 
@@ -224,8 +224,8 @@ class GraphSolver:
             # cost_term for sources
             cost_term = self.list_lcoe[:, None] * power_allocation_valid.sum(dim=1)  # shape (S, T)
             # econ_term for sinks
-            econ_term = self.list_econ_coefficient[:, None] * U                     # shape (D, T)
-            J = torch.sum(cost_term) + torch.sum(econ_term)
+            econ_term = self.list_econ_coefficient[:, None] * torch.nn.ReLU()(U)                     # shape (D, T)
+            J = torch.sum(econ_term) + torch.sum(cost_term)
 
             # 4) Constraint penalties
             # supply violation: sum across D, T for each source -> compare to total_power
@@ -257,6 +257,18 @@ if __name__ == "__main__":
     # Solve the optimization problem
     final_allocation, losses = solver.solve()
 
+    power_allocation_valid = final_allocation * solver.connectivity_mask_3d
+
+    # 1) Received power at each sink over T
+    #    distance is shape (S, D), so we expand to (S, D, T)
+    dist_3d = solver.matrix_distance.unsqueeze(-1).expand(solver.S, solver.D, solver.T)
+    received_power = (power_allocation_valid * dist_3d).sum(dim=0)  # shape (D, T)
+
+    # 2) Unmet demand
+    U = solver.list_demand_profile - received_power  # shape (D, T)
+
+
     # If you want to see final results directly:
-    print("\nFinal allocation:\n", final_allocation.detach().cpu().numpy())
+    print("\nFinal allocation:\n", power_allocation_valid.detach().cpu().numpy())
+    print(f"Unmet demand: {U}")
     print("\nLoss history (first 10 values):\n", losses[:10])
