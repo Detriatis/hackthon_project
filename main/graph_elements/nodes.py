@@ -2,6 +2,7 @@
 Test docstring (module-level).
 This module contains various node definitions for an energy network.
 """
+import numpy as np 
 
 class Node:
     """
@@ -118,7 +119,8 @@ class SourceNode(Node):
         if isinstance(self.power_output, list):
             return self.power_output[hour]
         else:
-            return self.power_output(hour)
+            return self.power_output(hour) 
+        
 
 
 class Solar(SourceNode):
