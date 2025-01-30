@@ -1,10 +1,10 @@
 # hackthon_project
 Power supply market optimisation 
 
-## Requirements
+## Installation
 
-`pip install Flask`
+`pip install --editable .`
 
 ## Get started
 
-`flask --app ui/app run`
+`python ui/app.py`
