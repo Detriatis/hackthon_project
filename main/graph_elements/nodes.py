@@ -70,6 +70,7 @@ class SinkNode(Node):
     def __init__(self, node_id, time_range, cartesian_coordinates):
         super().__init__(node_id, time_range, cartesian_coordinates)
         self.simulator = SinkPowerDemandSimulator(time_range)
+        self.simulator.power_demand()
 
     def get_demand(self, hour):
         """
@@ -213,7 +214,8 @@ class Gas(SourceNode):
     lcoe : float
         Levelized Cost of Electricity ($/MWh) for gas.
     """
-    def __init__(self, name, time_range):
-        super().__init__(name)
+    def __init__(self, name, time_range, cartesian_coordinates):
+        super().__init__(name, time_range, cartesian_coordinates)
         self.simulator = GasPowerSimulator(time_range)
-        simulation = self.init_simulation()
+        simulation = self.simulator.power_output()
+        

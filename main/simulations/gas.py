@@ -44,13 +44,14 @@ class GasPowerSimulator(SimulatorBase):
         capital_cost = peak_power * 500  # Example: $500 per kW capacity
         maintenance_cost_per_mwh = 50  # Higher O&M cost compared to renewables
         
-        cost_outputs = (power_outputs / 1000) * maintenance_cost_per_mwh
+        cost_outputs = (power_outputs / 1000) * (maintenance_cost_per_mwh * 1000) 
         
-        self.power_outputs = power_outputs
+
+        self.power_outputs = power_outputs / 1e6 
         self.capital_cost = capital_cost
         self.cost_outputs = cost_outputs
         self.peak_power = peak_power
-
+        self.plot_data()
     
     def plot_data(self):
         """

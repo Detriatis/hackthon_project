@@ -48,12 +48,13 @@ class SolarPowerSimulator(SimulatorBase):
         capital_cost = num_panels * 300  # Example: $300 per panel
         maintenance_cost_per_mwh = 5  # Example: $5 per MWh
         
-        cost_outputs = (power_outputs / 1000) * maintenance_cost_per_mwh
+        cost_outputs = (power_outputs / 1000) * (maintenance_cost_per_mwh * 1000) 
 
         self.num_panels = num_panels 
-        self.power_outputs = power_outputs
+        self.power_outputs = power_outputs / 1e6
         self.cost_outputs = cost_outputs
-        self.capital_cost = capital_cost 
+        self.capital_cost = capital_cost
+        self.plot_data() 
     
     def plot_data(self):
         """
@@ -66,7 +67,7 @@ class SolarPowerSimulator(SimulatorBase):
             - power_outputs (ndarray): Hourly power output in kW.
             - cost_outputs (ndarray): Hourly maintenance costs in USD.
         """
-        savepath = '../../data/figures'
+        savepath = '../../data/figures/solarpower.png'
         title = f'Hourly Power Output for {self.num_panels} Panel Solar Farm'
         label = 'Hourly power output for panel solar farm'
         self.plot_power_data(title=title, label=label, savepath=savepath)

@@ -52,11 +52,11 @@ class SimulatorBase():
         """
         return int(low + (high - low) * np.random.beta(skew_factor * 5, (1 - skew_factor) * 5))
  
-    @classmethod  
+     
     def plot_power_data(self, title, label, savepath):
                 
         plt.figure(figsize=(10, 5))
-        plt.plot(range(self.hours), self.power_outputs, marker='o', linestyle='-', label=label)
+        plt.plot(range(self.time_range), self.power_outputs, marker='o', linestyle='-', label=label)
         plt.xlabel('Hour')
         plt.ylabel('Power Output (kW)')
         plt.title(title)

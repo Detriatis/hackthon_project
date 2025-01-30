@@ -57,16 +57,17 @@ class WindPowerSimulator(SimulatorBase):
             else:
                 power_outputs[i] = (2300 / 13**3) * wind_speeds[i]**3
             
-            cost_outputs[i] = (power_outputs[i] / 1000) * maintenance_cost_per_mwh
+            cost_outputs[i] = (power_outputs[i] / 1000) * (maintenance_cost_per_mwh * 1000) 
         
         power_outputs *= num_turbines
         cost_outputs *= num_turbines
         
         self.num_turbines = num_turbines
         self.wind_speeds = wind_speeds
-        self.power_outputs = power_outputs
+        self.power_outputs = power_outputs / 1e6
         self.cost_outputs = cost_outputs
         self.capital_cost = capital_cost
+        self.plot_figure()
 
     def plot_figure(self):
         """
@@ -79,7 +80,7 @@ class WindPowerSimulator(SimulatorBase):
             - power_outputs (ndarray): Hourly power output in kW.
             - cost_outputs (ndarray): Hourly maintenance costs in USD.
         """
-        savepath = "../../../data/figures/windoutput.png"
+        savepath = "../../data/figures/windoutput.png"
         
         if self.offshore:
             title = f'Hourly Power Output for {self.num_turbines} Turbine Offshore Farm'
