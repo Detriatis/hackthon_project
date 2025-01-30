@@ -247,6 +247,11 @@
 <span class="sd">This module contains various node definitions for an energy network.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">simulations.gas</span> <span class="kn">import</span> <span class="n">GasPowerSimulator</span>
+<span class="kn">from</span> <span class="nn">simulations.solar</span> <span class="kn">import</span> <span class="n">SolarPowerSimulator</span>
+<span class="kn">from</span> <span class="nn">simulations.wind</span> <span class="kn">import</span> <span class="n">WindPowerSimulator</span>
+<span class="kn">from</span> <span class="nn">simulations.simulator_base</span> <span class="kn">import</span> <span class="n">SimulatorBase</span>
 
 <div class="viewcode-block" id="Node">
 <a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.html#graph_elements.nodes.Node">[docs]</a>
@@ -269,8 +274,10 @@
 <span class="sd">        A list of the connected nodes by node_id </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">node_id</span> <span class="o">=</span> <span class="n">node_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_range</span> <span class="o">=</span> <span class="n">time_range</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cartesian_coordinates</span> <span class="o">=</span> <span class="n">cartesian_coordinates</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connections</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connections_ids</span> <span class="o">=</span> <span class="p">[]</span> 
 
@@ -312,10 +319,8 @@
 <span class="sd">        Minimum required Levelized Cost of Electricity ($/MWh).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">demand_profile</span><span class="p">,</span> <span class="n">lcoe_requirement</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">demand_profile</span> <span class="o">=</span> <span class="n">demand_profile</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lcoe_requirement</span> <span class="o">=</span> <span class="n">lcoe_requirement</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SinkNode.get_demand">
 <a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.html#graph_elements.nodes.SinkNode.get_demand">[docs]</a>
@@ -337,7 +342,9 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">demand_profile</span><span class="p">[</span><span class="n">hour</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">demand_profile</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span></div>
-</div>
+
+    <span class="k">def</span> <span class="nf">node_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;sink&#39;</span></div>
 
 
 
@@ -368,16 +375,11 @@
 <span class="sd">        Time (in some unit, e.g., years) required to deploy the source.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">power_output</span><span class="p">,</span> <span class="n">dispatchability</span><span class="p">,</span> <span class="n">co2_per_mw</span><span class="p">,</span>
-                 <span class="n">ramp_up_time</span><span class="p">,</span> <span class="n">capital_cost</span><span class="p">,</span> <span class="n">lcoe</span><span class="p">,</span> <span class="n">deployment_time</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">power_output</span> <span class="o">=</span> <span class="n">power_output</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dispatchability</span> <span class="o">=</span> <span class="n">dispatchability</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">co2_per_mw</span> <span class="o">=</span> <span class="n">co2_per_mw</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ramp_up_time</span> <span class="o">=</span> <span class="n">ramp_up_time</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">capital_cost</span> <span class="o">=</span> <span class="n">capital_cost</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lcoe</span> <span class="o">=</span> <span class="n">lcoe</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">deployment_time</span> <span class="o">=</span> <span class="n">deployment_time</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">):</span>
+        
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span> <span class="o">=</span> <span class="n">SimulatorBase</span><span class="p">(</span><span class="n">time_range</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">power_output</span><span class="p">()</span>
 
 <div class="viewcode-block" id="SourceNode.get_power_output">
 <a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.html#graph_elements.nodes.SourceNode.get_power_output">[docs]</a>
@@ -393,15 +395,20 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">            The power output (MW) at the given hour.</span>
+<span class="sd">            The power output (MW) at the given hour</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_output</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_output</span><span class="p">[</span><span class="n">hour</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_output</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span> </div>
-</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">get_power_at_index</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span></div>
 
-        
+
+    <span class="k">def</span> <span class="nf">get_lcoe_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hour</span><span class="p">):</span> 
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">get_cost_at_index</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span> 
+    
+    <span class="k">def</span> <span class="nf">get_power_output_series</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">power_outputs</span>
+    
+    <span class="k">def</span> <span class="nf">get_lcoe_output_series</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">cost_outputs</span></div>
 
 
 <div class="viewcode-block" id="Solar">
@@ -421,15 +428,10 @@
 <span class="sd">    lcoe : float</span>
 <span class="sd">        Levelized Cost of Electricity ($/MWh) for solar.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">power_output</span><span class="p">,</span> <span class="n">capital_cost</span><span class="p">,</span> <span class="n">lcoe</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">power_output</span><span class="p">,</span>
-                         <span class="n">dispatchability</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                         <span class="n">co2_per_mw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                         <span class="n">ramp_up_time</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                         <span class="n">capital_cost</span><span class="o">=</span><span class="n">capital_cost</span><span class="p">,</span>
-                         <span class="n">lcoe</span><span class="o">=</span><span class="n">lcoe</span><span class="p">,</span>
-                         <span class="n">deployment_time</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
-
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span> <span class="o">=</span> <span class="n">SolarPowerSimulator</span><span class="p">(</span><span class="n">time_range</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">power_output</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="Wind">
@@ -449,14 +451,11 @@
 <span class="sd">    lcoe : float</span>
 <span class="sd">        Levelized Cost of Electricity ($/MWh) for wind.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">power_output</span><span class="p">,</span> <span class="n">capital_cost</span><span class="p">,</span> <span class="n">lcoe</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">power_output</span><span class="p">,</span>
-                         <span class="n">dispatchability</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
-                         <span class="n">co2_per_mw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                         <span class="n">ramp_up_time</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                         <span class="n">capital_cost</span><span class="o">=</span><span class="n">capital_cost</span><span class="p">,</span>
-                         <span class="n">lcoe</span><span class="o">=</span><span class="n">lcoe</span><span class="p">,</span>
-                         <span class="n">deployment_time</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">,</span> <span class="n">offshore</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span> <span class="o">=</span> <span class="n">WindPowerSimulator</span><span class="p">(</span><span class="n">time_range</span><span class="p">,</span> <span class="n">offshore</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">power_output</span><span class="p">()</span></div>
+
 
 
 
@@ -481,15 +480,10 @@
 <span class="sd">    lcoe : float</span>
 <span class="sd">        Levelized Cost of Electricity ($/MWh) for gas.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">power_output</span><span class="p">,</span> <span class="n">co2_per_mw</span><span class="p">,</span> <span class="n">ramp_up_time</span><span class="p">,</span>
-                 <span class="n">capital_cost</span><span class="p">,</span> <span class="n">lcoe</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">power_output</span><span class="p">,</span>
-                         <span class="n">dispatchability</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-                         <span class="n">co2_per_mw</span><span class="o">=</span><span class="n">co2_per_mw</span><span class="p">,</span>
-                         <span class="n">ramp_up_time</span><span class="o">=</span><span class="n">ramp_up_time</span><span class="p">,</span>
-                         <span class="n">capital_cost</span><span class="o">=</span><span class="n">capital_cost</span><span class="p">,</span>
-                         <span class="n">lcoe</span><span class="o">=</span><span class="n">lcoe</span><span class="p">,</span>
-                         <span class="n">deployment_time</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">time_range</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span> <span class="o">=</span> <span class="n">GasPowerSimulator</span><span class="p">(</span><span class="n">time_range</span><span class="p">)</span>
+        <span class="n">simulation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_simulation</span><span class="p">()</span></div>
 
 </pre></div>
         </article>

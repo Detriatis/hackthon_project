@@ -29,6 +29,7 @@ class SimulatorBase():
         self.power_outputs = None
         self.cost_outputs = None
         self.capital_cost = None 
+        self.power_demands = None 
 
     @staticmethod
     def skewed_random(low, high, skew_factor=0.65):
@@ -86,5 +87,8 @@ class SimulatorBase():
 
     def get_power_at_index(self, hour: int): 
         return self.power_outputs[hour]
+    
+    def get_power_demand_at_index(self, hour: int): 
+        return self.power_demands[hour]
 
         

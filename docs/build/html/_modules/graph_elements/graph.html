@@ -197,7 +197,19 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../_autosummary/graph_elements.html">graph_elements</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of graph_elements</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/graph_elements.connections.html">graph_elements.connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/graph_elements.graph.html">graph_elements.graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.html">graph_elements.nodes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/graph_elements.connections.html">graph_elements.connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/graph_elements.graph.html">graph_elements.graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.html">graph_elements.nodes</a></li>
+</ul>
+
 </div>
 </div>
 
@@ -304,9 +316,25 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">node_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span></div>
 
 
+    <span class="k">def</span> <span class="nf">get_sinks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="n">sink_nodes</span> <span class="o">=</span> <span class="p">[]</span> 
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span> 
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">SinkNode</span><span class="p">):</span>
+                <span class="n">sink_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sink_nodes</span>
+
+    <span class="k">def</span> <span class="nf">get_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="n">source_nodes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span> 
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">SourceNode</span><span class="p">):</span>
+                <span class="n">source_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> 
+
+        <span class="k">return</span> <span class="n">source_nodes</span>
+    
 <div class="viewcode-block" id="Graph.add_connection">
 <a class="viewcode-back" href="../../_autosummary/graph_elements.graph.html#graph_elements.graph.Graph.add_connection">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_a_id</span><span class="p">,</span> <span class="n">node_b_id</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_a_id</span><span class="p">,</span> <span class="n">node_b_id</span><span class="p">,</span> <span class="n">power_capacity</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a connection between two existing nodes in the graph.</span>
 
@@ -334,7 +362,7 @@
         <span class="n">node_a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node_a_id</span><span class="p">]</span>
         <span class="n">node_b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node_b_id</span><span class="p">]</span>
 
-        <span class="n">connection</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="n">node_a</span><span class="p">,</span> <span class="n">node_b</span><span class="p">,</span> <span class="n">power_capacity</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
 
         <span class="c1"># Update adjacency in each node</span>
@@ -418,7 +446,7 @@
             <span class="n">a_id</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">node_a</span><span class="o">.</span><span class="n">node_id</span>
             <span class="n">b_id</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">node_b</span><span class="o">.</span><span class="n">node_id</span>
             <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">node_index</span><span class="p">[</span><span class="n">a_id</span><span class="p">],</span> <span class="n">node_index</span><span class="p">[</span><span class="n">b_id</span><span class="p">]</span>
-
+            
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">directed</span><span class="p">:</span>
                 <span class="c1"># Optional logic for directed weighting</span>
                 <span class="n">adjacency_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connection</span><span class="o">.</span><span class="n">node_a</span><span class="p">,</span> <span class="n">SourceNode</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>

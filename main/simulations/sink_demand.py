@@ -57,7 +57,7 @@ class SinkPowerDemandSimulator(SimulatorBase):
         # Step 5: Ensure no demand goes below 0.1× mean (prevents near-zero values)
         min_demand_threshold = 0.1 * average_hourly_demand_gwh
         hourly_demand = np.maximum(hourly_demand, min_demand_threshold)
-
+        self.hourly_demand = hourly_demand 
         return hourly_demand
 
 

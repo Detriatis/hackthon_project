@@ -7,6 +7,7 @@ from simulations.gas import GasPowerSimulator
 from simulations.solar import SolarPowerSimulator
 from simulations.wind import WindPowerSimulator
 from simulations.simulator_base import SimulatorBase
+from simulations.sink_demand import SinkPowerDemandSimulator
 
 class Node:
     """
@@ -68,6 +69,7 @@ class SinkNode(Node):
 
     def __init__(self, node_id, time_range, cartesian_coordinates):
         super().__init__(node_id, time_range, cartesian_coordinates)
+        self.simulator = SinkPowerDemandSimulator(time_range)
 
     def get_demand(self, hour):
         """

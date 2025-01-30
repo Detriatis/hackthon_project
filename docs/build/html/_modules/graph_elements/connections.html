@@ -197,7 +197,19 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../_autosummary/graph_elements.html">graph_elements</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of graph_elements</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/graph_elements.connections.html">graph_elements.connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/graph_elements.graph.html">graph_elements.graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.html">graph_elements.nodes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/graph_elements.connections.html">graph_elements.connections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/graph_elements.graph.html">graph_elements.graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.html">graph_elements.nodes</a></li>
+</ul>
+
 </div>
 </div>
 
@@ -235,6 +247,13 @@
 <span class="sd">Contains the Functionality relating to managing the connections between two nodes.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">.nodes</span> <span class="kn">import</span> <span class="n">Node</span><span class="p">,</span> <span class="n">SourceNode</span><span class="p">,</span> <span class="n">SinkNode</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">euclidean</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">cdist</span>
+<span class="kn">from</span> <span class="nn">.nodes</span> <span class="kn">import</span> <span class="n">Node</span>
 
 <div class="viewcode-block" id="Connection">
 <a class="viewcode-back" href="../../_autosummary/graph_elements.connections.html#graph_elements.connections.Connection">[docs]</a>
@@ -267,30 +286,77 @@
 <span class="sd">        Current power being channeled by connection.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_a</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">node_b</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">power_capacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_a</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">node_b</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> 
+             <span class="n">power_capacity</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes a Connection between two nodes.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        node_a : Node</span>
+<span class="sd">            The source node.</span>
+<span class="sd">        node_b : Node</span>
+<span class="sd">            The destination node.</span>
+<span class="sd">        power_capacity : float</span>
+<span class="sd">            The power transmission limit for this connection.</span>
+<span class="sd">        weight_function : Callable[[Node, Node], float]</span>
+<span class="sd">            A function to compute power transmission efficiency.</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+<span class="sd">        node_a : Node</span>
+<span class="sd">            The source node of the connection.</span>
+<span class="sd">        node_b : Node</span>
+<span class="sd">            The destination node of the connection.</span>
+<span class="sd">        weight : float</span>
+<span class="sd">            The power efficiency factor (considering conversion loss and distance loss).</span>
+<span class="sd">        power_capacity : float</span>
+<span class="sd">            The maximum power this connection can handle.</span>
+<span class="sd">        power : float</span>
+<span class="sd">            The current power being transmitted.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">node_a</span> <span class="o">=</span> <span class="n">node_a</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">node_b</span> <span class="o">=</span> <span class="n">node_b</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">power_capacity</span> <span class="o">=</span> <span class="n">power_capacity</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-    <span class="k">def</span> <span class="nf">transmit_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Node</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_a</span><span class="o">.</span><span class="n">node_id</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="n">node_id</span><span class="p">:</span>
-            <span class="n">source_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_a</span> 
-            <span class="n">sink_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_b</span>
-        
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_b</span><span class="o">.</span><span class="n">node_id</span> <span class="o">==</span> <span class="n">node</span><span class="o">.</span><span class="n">node_id</span><span class="p">:</span> 
-            <span class="n">source_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_b</span>
-            <span class="n">sink_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_a</span> 
+        <span class="c1"># Compute the power efficiency factor using the provided weight function (transmission_loss_weight)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transmission_loss_weight</span><span class="p">()</span>
 
-        <span class="k">else</span><span class="p">:</span> 
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Node is not in the connection&#39;</span><span class="p">)</span>
-        
-        <span class="n">P</span> <span class="o">=</span> <span class="n">source_node</span><span class="o">.</span><span class="n">query_power</span><span class="p">(</span><span class="n">sink_node</span><span class="p">)</span>
-        <span class="n">sink_node</span><span class="o">.</span><span class="n">transmit_power</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">power</span> <span class="o">+=</span> <span class="n">P</span> 
+<div class="viewcode-block" id="Connection.transmission_loss_weight">
+<a class="viewcode-back" href="../../_autosummary/graph_elements.connections.html#graph_elements.connections.Connection.transmission_loss_weight">[docs]</a>
+    <span class="k">def</span> <span class="nf">transmission_loss_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes the weight based on power transmission losses:</span>
+<span class="sd">        - Power converter loss at source: 0.7% to 0.8% (randomized)</span>
+<span class="sd">        - Distance-based loss: 1% per 100 km </span>
+<span class="sd">        Ref for both: https://www.nationalgrid.com/sites/default/files/documents/13784-High%20Voltage%20Direct%20Current%20Electricity%20%E2%80%93%20technical%20information.pdf</span>
 
-        <span class="k">return</span> <span class="n">P</span><span class="p">,</span> <span class="n">sink_node</span>        </div>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        node_a : Node</span>
+<span class="sd">            The source or first node.</span>
+<span class="sd">        node_b : Node</span>
+<span class="sd">            The destination or second node.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            The weight representing power efficiency factor (0 to 1).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Distance-based loss (1% per 100 km)</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="n">euclidean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_a</span><span class="o">.</span><span class="n">cartesian_coordinates</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">node_b</span><span class="o">.</span><span class="n">cartesian_coordinates</span><span class="p">))</span>  <span class="c1"># in meters</span>
+        <span class="n">distance_loss_factor</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mf">0.01</span> <span class="o">*</span> <span class="p">(</span><span class="n">distance</span> <span class="o">/</span> <span class="mi">100_000</span><span class="p">))</span>  <span class="c1"># 1% per 100 km</span>
+
+        <span class="c1"># Converter efficiency at the source (random between 99.2% and 99.3%)</span>
+        <span class="n">converter_efficiency</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.992</span><span class="p">,</span> <span class="mf">0.993</span><span class="p">)</span>  <span class="c1"># Random value between 0.992 and 0.993</span>
+
+        <span class="c1"># Final power efficiency factor (apply converter loss first, then distance loss)</span>
+        <span class="n">total_efficiency</span> <span class="o">=</span> <span class="n">converter_efficiency</span> <span class="o">*</span> <span class="n">distance_loss_factor</span>
+
+        <span class="c1"># Ensure efficiency never goes negative</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">total_efficiency</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+</div>
 
 </pre></div>
         </article>
