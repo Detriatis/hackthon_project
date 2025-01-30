@@ -255,7 +255,7 @@ if __name__ == "__main__":
     test_graph = LargeGraph()
     # Create the solver instance with T=3 (matching demand profiles)
     # solver = GraphSolver(test_graph, T=3, epochs=1000)
-    solver = GraphSolver(test_graph, T=5, epochs=1000)
+    solver = GraphSolver(test_graph, T=5, epochs=10000)
     # Solve the optimization problem
     final_allocation, losses = solver.solve()
 
@@ -274,3 +274,9 @@ if __name__ == "__main__":
     print("\nFinal allocation:\n", power_allocation_valid.detach().cpu().numpy())
     print(f"Unmet demand: {U}")
     print("\nLoss history (first 10 values):\n", losses[:10])
+    plt.plot(losses)
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.title("Loss History")
+    plt.savefig("loss_plot/loss_history.png", dpi=200)
+    plt.show()
