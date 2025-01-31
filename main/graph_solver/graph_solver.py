@@ -3,6 +3,11 @@ import matplotlib.pyplot as plt
 import torch
 from graph_elements.graph import Graph
 import numpy as np
+import random 
+
+random.seed(42)
+torch.manual_seed(42)
+np.random.seed(42)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
