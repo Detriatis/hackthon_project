@@ -1,14 +1,13 @@
 import torch.optim as optim
 import matplotlib.pyplot as plt
 import torch
-from graph_elements.nodes import Node, SourceNode, SinkNode
 from graph_elements.graph import Graph
 import numpy as np
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class GraphSolver:
-    def __init__(self, graph: Graph, T=24, epochs=1000, lambda_n=100):
+    def __init__(self, graph: Graph, T=24, epochs=1000, lambda_n=0.1):
         self.graph: Graph = graph
         self.epochs = epochs
 
@@ -47,8 +46,6 @@ class GraphSolver:
         # 7) define hyperparameters
         self.lambda_n = lambda_n
 
-
-
     def _build_node_tensors(self):
         # for demonstration, collect S sources and D sinks
         self.list_total_power = []
@@ -82,6 +79,7 @@ class GraphSolver:
             # Option A) Force them to zero so they don't contribute to cost
             # Option B) Multiply in the forward pass
             power_allocation_valid = self.matrix_power_allocation * self.connectivity_mask_3d
+            print(f"power_allocation_valid: {power_allocation_valid}")
 
             # 1) Received power at each sink over T
             #    distance is shape (S, D), so we expand to (S, D, T)
@@ -90,6 +88,7 @@ class GraphSolver:
 
             # 2) Unmet demand
             U = self.list_demand_profile - received_power  # shape (D, T)
+            print(f"Unmet demand: {U}")
 
             # 3) Objective J
             # cost_term for sources
@@ -99,9 +98,12 @@ class GraphSolver:
             econ_term = self.list_econ_coefficient[:, None] * torch.nn.ReLU()(U)                     # shape (D, T)
             J = torch.sum(econ_term) + torch.sum(cost_term)
 
+
             # 4) Constraint penalties
             # supply violation: sum across D, T for each source -> compare to total_power
-            supply_violations = power_allocation_valid.sum(dim=1) - self.list_total_power[:, None]  
+            supply_violations = power_allocation_valid.sum(dim=1) - self.list_total_power[:, None]
+            print(f"Supply_violations: {supply_violations}")
+            print(f"list_total_power: {self.list_total_power / power_allocation_valid.sum(dim=1) }")
             L_supply = self.lambda_n * torch.sum(torch.relu(supply_violations)**2)
 
             # non-negativity penalty (on power_allocation + on U if we don't want negative U)
@@ -109,6 +111,9 @@ class GraphSolver:
 
             L_total = J + L_supply + L_neg
             L_total.backward()
+            print(f"cost_term: {torch.sum(cost_term)}")
+            print(f"econ_term: {torch.sum(econ_term)}")
+            print(f"L_total: {L_total}")
 
             self.optimizer.step()
             self.losses.append(L_total.item())
