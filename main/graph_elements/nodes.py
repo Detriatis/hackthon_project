@@ -5,7 +5,7 @@ import numpy as np
 from abc import abstractmethod
 from simulations.simulator_base import SimulatorBase
 from simulations.source_simulators import GasPowerSimulator, WindPowerSimulator, SolarPowerSimulator
-from main.simulations.sink_simulators import CityPowerDemandSimulator
+from simulations.sink_simulators import CityPowerDemandSimulator
 
 class Node:
     """

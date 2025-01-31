@@ -1,14 +1,13 @@
 """
 Contains the Functionality relating to managing the connections between two nodes.
 """
-from .nodes import Node, SourceNode, SinkNode
+from graph_elements.nodes import Node, SourceNode, SinkNode
 from scipy.spatial.distance import euclidean
 import numpy as np 
 from typing import Callable
 
 import numpy as np
 from scipy.spatial.distance import cdist
-from .nodes import Node
 
 class Connection:
     """
