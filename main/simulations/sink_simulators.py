@@ -129,7 +129,7 @@ class CityPowerDemandSimulator(SimulatorBase):
 
         # 5. Ensure no demand goes below 10% of the mean demand
         min_demand_threshold = 0.1 * average_hourly_demand_gwh
-        hourly_demand = np.maximum(hourly_demand, min_demand_threshold)
+        hourly_demand = np.maximum(hourly_demand, min_demand_threshold) * 1e6
 
         self.hourly_demand = hourly_demand
         return hourly_demand

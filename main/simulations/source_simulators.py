@@ -114,10 +114,11 @@ class SolarPowerSimulator(SimulatorBase):
         lcoe = 45
         cost_outputs = self.get_costs(power_outputs, lcoe)
 
+        cost_outputs = np.full_like(power_outputs, lcoe)
         # Store internal states
         self.num_panels = num_panels
         # Convert power_outputs to MW for internal storage/plotting
-        self.power_outputs = power_outputs
+        self.power_outputs = power_outputs 
         self.cost_outputs = cost_outputs
         self.capital_cost = capital_cost
 
@@ -209,14 +210,14 @@ class GasPowerSimulator(SimulatorBase):
         peak_power = self.skewed_random(410, 2200) * 1000  # Peak power in kW
 
         # Gas plants typically run at a constant output (no variation)
-        power_outputs = np.full(self.hours, peak_power) 
+        power_outputs = np.full(self.hours, peak_power)
 
         # Costs
         capital_cost = peak_power * 500        # Example: $500 per kW capacity
         lcoe = 80    # dollar per kw hour
         
         cost_outputs = self.get_costs(power_outputs, lcoe) 
-        
+        cost_outputs = np.full_like(power_outputs, lcoe)
         # Store internal states
         self.power_outputs = power_outputs
         self.capital_cost = capital_cost
@@ -339,17 +340,17 @@ class WindPowerSimulator(SimulatorBase):
                 power_outputs[i] = 2300
             else:
                 # Assume a cubic relationship up to rated speed
-                power_outputs[i] = ((2300 / 13**3) * wind_speeds[i]**3)
+                power_outputs[i] = ((2300 / 13**3) * wind_speeds[i]**3) 
         if self.offshore:
             lcoe = 75
         else:
             lcoe = 35
 
         cost_outputs = self.get_costs(power_outputs, lcoe)
-
         # Scale by the number of turbines
         power_outputs *= num_turbines
         cost_outputs *= num_turbines
+        cost_outputs = np.full_like(power_outputs, lcoe)
 
         # Store internal states
         self.num_turbines = num_turbines

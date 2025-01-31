@@ -12,7 +12,7 @@ np.random.seed(42)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class GraphSolver:
-    def __init__(self, graph: Graph, T=24, epochs=1000, lambda_n=0.1, econ_coef=10):
+    def __init__(self, graph: Graph, T=24, epochs=1000, lambda_n=100, econ_coef=100):
         self.graph: Graph = graph
         self.epochs = epochs
         self.econ_coef = econ_coef
@@ -45,7 +45,7 @@ class GraphSolver:
         self._build_node_tensors()
 
         # 6) Define optimizer *directly on matrix_power_allocation*
-        self.optimizer = optim.Adam([self.matrix_power_allocation], lr=0.001)
+        self.optimizer = optim.Adam([self.matrix_power_allocation], lr=1)
         self.losses = []
 
         # 7) define hyperparameters
@@ -75,8 +75,8 @@ class GraphSolver:
         print('list lcoe', self.list_lcoe)
         print('list econ coef', self.list_econ_coefficient)
         print('demand profile', self.list_demand_profile)
-    
-    def solve(self):
+        
+    def solve(self):    
         for epoch in range(self.epochs):
             self.optimizer.zero_grad()
 
@@ -93,7 +93,7 @@ class GraphSolver:
 
             # 2) Unmet demand
             U = self.list_demand_profile - received_power  # shape (D, T)
-
+            print('Unmet', U)
             # 3) Objective J
             # cost_term for sources
             cost_term = (self.list_lcoe * power_allocation_valid.sum(dim=1)).sum()
