@@ -1,5 +1,7 @@
 # Power Supply Network Optimization
 
+## Alex Higginbottom, Oscar Hill, Michael Dodds, Hanlin Xiao
+
 # Guide to the code
 
 ## Installation
@@ -26,6 +28,8 @@ This project focuses on optimizing a power supply network between power sources 
 A simplified model considers power plants as **sources** and cities as **sinks**, with transmission lines forming the network structure. The objective is to optimize the distribution of power to improve efficiency, minimize losses, and ensure stability. An example of this interconnected power supply graph is shown below.
 
 ![Example Network Diagram](visuals/visualisation.png)
+
+![Power visualisation](visuals/animation.gif)
 ---
 
 ## Dynamic Pricing and Supply Optimization

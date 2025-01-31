@@ -53,4 +53,4 @@ def main():
     #print(f"Power allocations: {power_allocations}")
     
 if __name__ == '__main__': 
-    main() 
+    main()

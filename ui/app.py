@@ -6,16 +6,20 @@ from graph_elements.graph import Graph
 
 app = Flask(__name__)
 
-source_solar = Solar("solar1", "10", "10", "10") 
-source_wind = Wind("wind1", "10", "10", "10")
-sink = SinkNode("city1", "10", "10") 
-graph = Graph(directed=False)
+T = 5
+source_solar = Solar('solar1', T, [0, 1])
+source_wind = Wind('wind1', T, [1, 0], offshore=True)
+source_gas = Gas('gas1', T, [1, 1])
+sink = SinkNode('city1', T, [0, 0], 10) 
+graph = Graph(directed=True)
 
 graph.add_node(sink)
 graph.add_node(source_solar)
 graph.add_node(source_wind)
-graph.add_connection(source_solar.node_id, sink.node_id, weight=0.25)
-graph.add_connection(source_wind.node_id, sink.node_id, weight=1)
+graph.add_node(source_gas)
+graph.add_connection(source_solar.node_id, sink.node_id, 100000)
+graph.add_connection(source_wind.node_id, sink.node_id, 100000)
+graph.add_connection(source_gas.node_id, sink.node_id, 100000)
 
 @app.route("/")
 def index():
