@@ -34,6 +34,15 @@
             .attr("class", "link")
             .attr("stroke-width", d => d.power / 50);
 
+        function updateLinkWidths() {
+            link.transition()
+                .duration(2000)
+                .ease(d3.easeLinear)
+                .attr("stroke-width", d => (Math.sin(Date.now() / 500) * 1 + 0.5) * (d.power / 20))
+                .on("end", updateLinkWidths);
+        }
+        setInterval(updateLinkWidths, 2000);
+
         const node = svg.append("g")
             .selectAll("g")
             .data(graphData.nodes)
