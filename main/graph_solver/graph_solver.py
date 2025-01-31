@@ -12,7 +12,7 @@ np.random.seed(42)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class GraphSolver:
-    def __init__(self, graph: Graph, T=24, epochs=1000, lambda_n=100, econ_coef=100):
+    def __init__(self, graph: Graph, T=24, epochs=1000, lambda_n=100000000, econ_coef=1000):
         self.graph: Graph = graph
         self.epochs = epochs
         self.econ_coef = econ_coef
@@ -85,12 +85,10 @@ class GraphSolver:
             econ_term = self.list_econ_coefficient[:, None] * torch.nn.ReLU()(U)
             J = torch.sum(econ_term) + torch.sum(cost_term)
 
-
             supply_violations = self.lambda_n * (power_allocation_valid.sum(dim=1) - self.list_total_power)
-            L_supply = torch.sum(torch.relu(supply_violations))
-
-
-            L_total = J + L_supply
+            L_supply = torch.relu(supply_violations)
+            
+            L_total = J + torch.sum(L_supply)
             L_total.backward()
 
             self.optimizer.step()
@@ -98,6 +96,6 @@ class GraphSolver:
 
             if epoch % 200 == 0:
                 print(f"Epoch {epoch}, Loss: {L_total.item():.4f}")
-                print()
+                print(f"Supply Violations {L_supply}")
 
         return torch.nn.ReLU()(self.matrix_power_allocation).detach(), self.losses
