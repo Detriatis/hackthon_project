@@ -1,15 +1,38 @@
 """
+graph.py
+========
+
 This module provides the Graph class for constructing and managing
 directed or undirected graphs of Node objects and their Connections.
+
+Examples
+--------
+>>> from graph import Graph
+>>> from nodes import Node
+>>>
+>>> # Create a simple graph
+>>> g = Graph(directed=False)
+>>> n1 = Node(node_id="A", time_range=24, cartesian_coordinates=(0, 0))
+>>> n2 = Node(node_id="B", time_range=24, cartesian_coordinates=(1, 1))
+>>> g.add_node(n1)
+>>> g.add_node(n2)
+>>> g.add_connection("A", "B", power_capacity=100)
+>>> adj_matrix, index_map = g.construct_adjacency()
+>>> print(adj_matrix)
 """
 
 import numpy as np
 from .nodes import SinkNode, SourceNode, Node
 from .connections import Connection
 
+
 class Graph:
     """
     A directed or undirected graph of nodes and connections.
+
+    This class stores nodes (in a dictionary) and the connections (in a list).
+    It provides methods to add nodes, add connections, and build an adjacency
+    matrix for various graph operations.
 
     Parameters
     ----------
@@ -24,10 +47,19 @@ class Graph:
     connections : list of Connection
         A list of Connection objects between nodes.
     directed : bool
-        Indicates whether the graph is directed.
+        Indicates whether the graph is directed (True) or undirected (False).
     """
 
     def __init__(self, directed: bool = False):
+        """
+        Initialize the graph with optional directionality.
+
+        Parameters
+        ----------
+        directed : bool, optional
+            Set to True for a directed graph; False for undirected.
+            Default is False.
+        """
         self.nodes = {}
         self.connections = []
         self.directed = directed
@@ -39,7 +71,7 @@ class Graph:
         Parameters
         ----------
         node : Node
-            A node object to be added.
+            The node object to be added.
 
         Returns
         -------
@@ -63,23 +95,41 @@ class Graph:
         for node in nodes:
             self.nodes[node.node_id] = node
 
-    def get_sinks(self): 
-        sink_nodes = [] 
+    def get_sinks(self):
+        """
+        Retrieve all sink nodes from the graph.
+
+        A sink node is identified by being an instance of `SinkNode`.
+
+        Returns
+        -------
+        list of SinkNode
+            A list containing all sink nodes in the graph.
+        """
+        sink_nodes = []
         for node in self.nodes.values():
             if isinstance(node, SinkNode):
                 sink_nodes.append(node)
-
         return sink_nodes
 
-    def get_sources(self): 
-        source_nodes = []
-        for node in self.nodes.values(): 
-            if isinstance(node, SourceNode):
-                source_nodes.append(node) 
+    def get_sources(self):
+        """
+        Retrieve all source nodes from the graph.
 
+        A source node is identified by being an instance of `SourceNode`.
+
+        Returns
+        -------
+        list of SourceNode
+            A list containing all source nodes in the graph.
+        """
+        source_nodes = []
+        for node in self.nodes.values():
+            if isinstance(node, SourceNode):
+                source_nodes.append(node)
         return source_nodes
-    
-    def add_connection(self, node_a_id, node_b_id, power_capacity):
+
+    def add_connection(self, node_a_id: str, node_b_id: str, power_capacity: float):
         """
         Add a connection between two existing nodes in the graph.
 
@@ -89,9 +139,8 @@ class Graph:
             The source node's ID.
         node_b_id : str
             The destination node's ID.
-        weight : float, optional
-            A parameter indicating, for instance, the "cost" or "capacity"
-            of the connection. Defaults to 1.0.
+        power_capacity : float
+            The power capacity (or "weight") of the connection.
 
         Raises
         ------
@@ -112,12 +161,11 @@ class Graph:
 
         # Update adjacency in each node
         node_a.set_connection(connection, node_b_id)
-        
+
         if not self.directed:
-            # In undirected graphs, we also record the connection on node_b
+            # In undirected graphs, record the connection on node_b as well
             node_b.set_connection(connection, node_a_id)
-            
-        
+
     def get_node(self, node_id: str) -> Node:
         """
         Retrieve a node object by its ID.
@@ -146,23 +194,25 @@ class Graph:
         Returns
         -------
         list of Connection
-            A list of connections from the specified node.
+            A list of connections originating from or associated with
+            the specified node.
 
         Raises
         ------
         KeyError
             If the node_id does not exist in the graph.
         """
-        node = self.nodes[node_id]  # Will raise KeyError if missing
+        node = self.nodes[node_id]  # Raises KeyError if missing
         return node.connections
 
     def construct_adjacency(self):
         """
         Construct an adjacency matrix representing the graph.
 
-        For each connection, the matrix entry [i, j] is set to the weight
-        if the graph is directed or to the weight in both [i, j] and [j, i]
-        if undirected.
+        For each connection, the matrix entry [i, j] is set to the
+        `power_capacity` of the connection. In a directed graph,
+        entry [i, j] will be nonzero if there is a connection from i to j.
+        In an undirected graph, both [i, j] and [j, i] are set to this value.
 
         Returns
         -------
@@ -174,7 +224,7 @@ class Graph:
         n = len(self.nodes)
         adjacency_matrix = np.zeros((n, n))
 
-        # Create an index mapping
+        # Create an index mapping for node_id -> matrix index
         node_index = {node_id: i for i, node_id in enumerate(self.nodes.keys())}
 
         for connection in self.connections:
@@ -182,11 +232,10 @@ class Graph:
             a_id = connection.node_a.node_id
             b_id = connection.node_b.node_id
             i, j = node_index[a_id], node_index[b_id]
-            
+
             if self.directed:
-                # Optional logic for directed weighting
-                adjacency_matrix[i, j] = w if isinstance(connection.node_a, SourceNode) else 0
-                adjacency_matrix[j, i] = w if not isinstance(connection.node_a, SourceNode) else 0
+                # Optionally, you could further customize how directed edges work
+                adjacency_matrix[i, j] = w
             else:
                 adjacency_matrix[i, j] = w
                 adjacency_matrix[j, i] = w
