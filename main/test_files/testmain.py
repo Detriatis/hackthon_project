@@ -89,9 +89,9 @@ class LargeGraph:
         #   total_power = how much power this source can supply
         #   lcoe        = cost coefficient
         source_nodes = [
-            Node(node_type="source", total_power=80.0,  lcoe=5.0),
-            Node(node_type="source", total_power=60.0,  lcoe=8.0),
-            Node(node_type="source", total_power=100.0, lcoe=6.0),
+            Node(node_type="source", total_power=80.0,  lcoe=[5.0,7.4, 4,2,3]),
+            Node(node_type="source", total_power=60.0,  lcoe=[8.0,5,7,3,4]),
+            Node(node_type="source", total_power=100.0, lcoe=[6.0,3,4,4,3]),
         ]
 
         # Sink nodes:
@@ -222,7 +222,7 @@ class GraphSolver:
 
             # 3) Objective J
             # cost_term for sources
-            cost_term = self.list_lcoe[:, None] * power_allocation_valid.sum(dim=1)  # shape (S, T)
+            cost_term = (self.list_lcoe * power_allocation_valid.sum(dim=1)).sum()
             # econ_term for sinks
             econ_term = self.list_econ_coefficient[:, None] * torch.nn.ReLU()(U)                     # shape (D, T)
             J = torch.sum(econ_term) + torch.sum(cost_term)
