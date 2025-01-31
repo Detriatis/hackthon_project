@@ -83,7 +83,7 @@ class GraphSolver:
             # ----- Mask out invalid edges -----
             # Option A) Force them to zero so they don't contribute to cost
             # Option B) Multiply in the forward pass
-            power_allocation_valid = self.matrix_power_allocation * self.connectivity_mask_3d
+            power_allocation_valid = torch.nn.ReLU()(self.matrix_power_allocation) * self.connectivity_mask_3d
             print(f"power_allocation_valid: {power_allocation_valid}")
 
             # 1) Received power at each sink over T
@@ -126,4 +126,4 @@ class GraphSolver:
             if epoch % 200 == 0:
                 print(f"Epoch {epoch}, Loss: {L_total.item():.4f}")
 
-        return self.matrix_power_allocation.detach(), self.losses
+        return torch.nn.ReLU()(self.matrix_power_allocation).detach(), self.losses
