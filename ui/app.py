@@ -1,8 +1,8 @@
 from flask import Flask, render_template, url_for
 import json
-from main.graph_elements.connections import Connection
-from main.graph_elements.nodes import SourceNode, SinkNode, Solar, Wind, Gas, Node
-from main.graph_elements.graph import Graph
+from graph_elements.connections import Connection
+from graph_elements.nodes import SourceNode, SinkNode, Solar, Wind, Gas, Node
+from graph_elements.graph import Graph
 
 app = Flask(__name__)
 
