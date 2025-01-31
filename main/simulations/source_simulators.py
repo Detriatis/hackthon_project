@@ -114,7 +114,6 @@ class SolarPowerSimulator(SimulatorBase):
         lcoe = 45
         cost_outputs = self.get_costs(power_outputs, lcoe)
 
-        cost_outputs = np.full_like(power_outputs, lcoe)
         # Store internal states
         self.num_panels = num_panels
         # Convert power_outputs to MW for internal storage/plotting
@@ -217,7 +216,6 @@ class GasPowerSimulator(SimulatorBase):
         lcoe = 80    # dollar per kw hour
         
         cost_outputs = self.get_costs(power_outputs, lcoe) 
-        cost_outputs = np.full_like(power_outputs, lcoe)
         # Store internal states
         self.power_outputs = power_outputs
         self.capital_cost = capital_cost
@@ -350,7 +348,6 @@ class WindPowerSimulator(SimulatorBase):
         # Scale by the number of turbines
         power_outputs *= num_turbines
         cost_outputs *= num_turbines
-        cost_outputs = np.full_like(power_outputs, lcoe)
 
         # Store internal states
         self.num_turbines = num_turbines

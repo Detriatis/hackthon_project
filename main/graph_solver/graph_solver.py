@@ -75,7 +75,7 @@ class GraphSolver:
         print('list lcoe', self.list_lcoe)
         print('list econ coef', self.list_econ_coefficient)
         print('demand profile', self.list_demand_profile)
-        
+        raise 
     def solve(self):    
         for epoch in range(self.epochs):
             self.optimizer.zero_grad()
