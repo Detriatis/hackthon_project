@@ -6,6 +6,7 @@ This project focuses on optimizing a power supply network between power sources 
 
 A simplified model considers power plants as **sources** and cities as **sinks**, with transmission lines forming the network structure. The objective is to optimize the distribution of power to improve efficiency, minimize losses, and ensure stability.
 
+![Example Network Diagram](visualisation.png)
 ---
 
 ## Dynamic Pricing and Supply Optimization
@@ -67,7 +68,7 @@ Where:
 The objective function to minimize is:
 
 $$
-\int C_T(t) dt
+C_T(t) dt
 $$
 
 ---
@@ -90,4 +91,3 @@ The gradient descent update steps iteratively adjust $P_{ij}(t)$ values to minim
 
 Below is an example representation of the **two-sources, two-sinks** network:
 
-![Example Network Diagram](path/to/your/image.png)
