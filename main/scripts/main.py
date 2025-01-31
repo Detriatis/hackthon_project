@@ -2,10 +2,10 @@ from graph_elements.connections import Connection
 from graph_elements.nodes import SourceNode, SinkNode, Solar, Wind, Gas, Node
 from graph_elements.graph import Graph
 from graph_solver.graph_solver import GraphSolver
-
+from graph_elements.graph_generator import GraphGenerator
 
 def main():
-    T = 5
+    T = 24
     source_solar = Solar('solar1', T, [0, 1])
     source_wind = Wind('wind1', T, [1, 0], offshore=True)
     source_gas = Gas('gas1', T, [1, 1])
@@ -45,9 +45,12 @@ def main():
             
     assert len(power_series) == len(demand_series)
 
+    graphgen = GraphGenerator(10, 10, 10, 3, T)
+    graph = graphgen.generate_graph()
+
     solver = GraphSolver(graph, T=T)
     power_allocations, _ = solver.solve()
-    print(f"Power allocations: {power_allocations}")
+    #print(f"Power allocations: {power_allocations}")
     
 if __name__ == '__main__': 
     main() 

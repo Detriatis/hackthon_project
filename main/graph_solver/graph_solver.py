@@ -45,7 +45,7 @@ class GraphSolver:
         self._build_node_tensors()
 
         # 6) Define optimizer *directly on matrix_power_allocation*
-        self.optimizer = optim.Adam([self.matrix_power_allocation], lr=1000)
+        self.optimizer = optim.Adam([self.matrix_power_allocation], lr=15)
         self.losses = []
 
         # 7) define hyperparameters
@@ -86,6 +86,7 @@ class GraphSolver:
             J = torch.sum(econ_term) + torch.sum(cost_term)
 
             supply_violations = self.lambda_n * (power_allocation_valid.sum(dim=1) - self.list_total_power)
+        
             L_supply = torch.relu(supply_violations)
             
             L_total = J + torch.sum(L_supply)
@@ -96,6 +97,6 @@ class GraphSolver:
 
             if epoch % 200 == 0:
                 print(f"Epoch {epoch}, Loss: {L_total.item():.4f}")
-                print(f"Supply Violations {L_supply}")
+                print(f"Unmet {torch.relu(U)}")
 
         return torch.nn.ReLU()(self.matrix_power_allocation).detach(), self.losses
