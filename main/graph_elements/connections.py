@@ -21,9 +21,8 @@ Examples
 
 from typing import Callable
 import numpy as np
+from graph_elements.nodes import Node, SourceNode, SinkNode
 from scipy.spatial.distance import euclidean
-from .nodes import Node, SourceNode, SinkNode
-
 
 class Connection:
     """
