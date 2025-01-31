@@ -4,13 +4,20 @@
 
 ## Installation
 
+To install our Python module, run:
+
 `pip install --editable .`
 
 ## Get started
 
-`python ui/app.py`
+To run our optimisation procedure and view the results:
 
+`python main/scripts/main.py`
 
+## Documentation
+
+To build the docs: `cd docs && bash construct.sh`.
+The docs have already been built: just view the HTML files in `docs/build/html` by running `python -m http.server`
 
 ## Introduction
 
