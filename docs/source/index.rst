@@ -11,6 +11,9 @@ Welcome to the Hackathon Project documentation!
    :recursive:
 
    graph_elements
+   graph_solver
+   simulations
+
    
 
 Indices and tables
