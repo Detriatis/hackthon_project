@@ -226,24 +226,18 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../_autosummary/simulations.html">simulations</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of simulations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.gas.html">simulations.gas</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of simulations.gas</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.gas.GasPowerSimulator.html">simulations.gas.GasPowerSimulator</a></li>
-</ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.simulator_base.html">simulations.simulator_base</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of simulations.simulator_base</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.simulator_base.html">simulations.simulator_base</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of simulations.simulator_base</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.simulator_base.SimulatorBase.html">simulations.simulator_base.SimulatorBase</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.sink_demand.html">simulations.sink_demand</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of simulations.sink_demand</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.sink_demand.SinkPowerDemandSimulator.html">simulations.sink_demand.SinkPowerDemandSimulator</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.sink_simulators.html">simulations.sink_simulators</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of simulations.sink_simulators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.sink_simulators.CityPowerDemandSimulator.html">simulations.sink_simulators.CityPowerDemandSimulator</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.solar.html">simulations.solar</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of simulations.solar</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.solar.SolarPowerSimulator.html">simulations.solar.SolarPowerSimulator</a></li>
-</ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.wind.html">simulations.wind</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of simulations.wind</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.wind.WindPowerSimulator.html">simulations.wind.WindPowerSimulator</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.source_simulators.html">simulations.source_simulators</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of simulations.source_simulators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.source_simulators.GasPowerSimulator.html">simulations.source_simulators.GasPowerSimulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.source_simulators.SolarPowerSimulator.html">simulations.source_simulators.SolarPowerSimulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.source_simulators.WindPowerSimulator.html">simulations.source_simulators.WindPowerSimulator</a></li>
 </ul>
 </li>
 </ul>
@@ -287,30 +281,33 @@
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">graph_elements.nodes</span> <span class="kn">import</span> <span class="n">Node</span><span class="p">,</span> <span class="n">SourceNode</span><span class="p">,</span> <span class="n">SinkNode</span>
-<span class="kn">from</span> <span class="nn">graph_elements.graph</span> <span class="kn">import</span> <span class="n">Graph</span> 
+<span class="kn">from</span> <span class="nn">graph_elements.graph</span> <span class="kn">import</span> <span class="n">Graph</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
-
 
 <div class="viewcode-block" id="GraphSolver">
 <a class="viewcode-back" href="../../_autosummary/graph_solver.graph_solver.GraphSolver.html#graph_solver.graph_solver.GraphSolver">[docs]</a>
 <span class="k">class</span> <span class="nc">GraphSolver</span><span class="p">:</span>
 <div class="viewcode-block" id="GraphSolver.__init__">
 <a class="viewcode-back" href="../../_autosummary/graph_solver.graph_solver.GraphSolver.html#graph_solver.graph_solver.GraphSolver.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">lambda_n</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">lambda_n</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">:</span> <span class="n">Graph</span> <span class="o">=</span> <span class="n">graph</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">epochs</span> <span class="o">=</span> <span class="n">epochs</span>
 
-        <span class="c1">#### TODO this is incorrect: The shape is actually (S + D, S + D) as we made the assumption</span>
-        <span class="c1">#### That all nodes could, in theory, connect to any other node. So either we need to change</span>
-        <span class="c1">#### the construct adjacency function or the shape this code expects</span>
-        <span class="c1"># 1) Construct adjacency</span>
-        <span class="n">adj</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">construct_adjacency</span><span class="p">()</span>  <span class="c1"># shape (S, D)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">matrix_distance</span> <span class="o">=</span> <span class="n">adj</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">sources</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_sources</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sinks</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">get_sinks</span><span class="p">()</span>
         <span class="c1"># 2) Prepare shapes</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix_distance</span><span class="o">.</span><span class="n">shape</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sinks</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">T</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">matrix_distance</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">source_idx</span><span class="p">,</span> <span class="n">source</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">sink_idx</span><span class="p">,</span> <span class="n">sink</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sinks</span><span class="p">):</span> 
+                <span class="k">for</span> <span class="n">connection</span> <span class="ow">in</span> <span class="n">source</span><span class="o">.</span><span class="n">connections</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">connection</span><span class="o">.</span><span class="n">node_b</span><span class="o">.</span><span class="n">node_id</span> <span class="o">==</span> <span class="n">sink</span><span class="o">.</span><span class="n">node_id</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">matrix_distance</span><span class="p">[</span><span class="n">source_idx</span><span class="p">][</span><span class="n">sink_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">weight</span>
 
         <span class="c1"># 3) Instead of masked_select, create a full matrix_power_allocation as a leaf Parameter</span>
         <span class="c1">#    The entire (S, D, T) becomes trainable</span>
@@ -324,7 +321,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">connectivity_mask_3d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">connectivity_mask</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 
         <span class="c1"># 5) Read node data from the graph (example)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_build_node_tensors</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_build_node_tensors</span><span class="p">()</span>
 
         <span class="c1"># 6) Define optimizer *directly on matrix_power_allocation*</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">matrix_power_allocation</span><span class="p">],</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
@@ -343,13 +340,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">list_econ_coefficient</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">list_demand_profile</span> <span class="o">=</span> <span class="p">[]</span>
         
-        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">SourceNode</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">list_total_power</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">total_power</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">list_lcoe</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">lcoe</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">SinkNode</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">list_econ_coefficient</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">econ_coefficient</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">list_demand_profile</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">demand_profile</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">list_total_power</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">get_power_output_series</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">list_lcoe</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">get_lcoe_output_series</span><span class="p">())</span>
+
+        <span class="k">for</span> <span class="n">sink</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sinks</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">list_econ_coefficient</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sink</span><span class="o">.</span><span class="n">econ_coefficient</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">list_demand_profile</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sink</span><span class="o">.</span><span class="n">demand_profile</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">list_total_power</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list_total_power</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">list_lcoe</span>       <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list_lcoe</span><span class="p">,</span>       <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
@@ -380,7 +377,8 @@
 
             <span class="c1"># 3) Objective J</span>
             <span class="c1"># cost_term for sources</span>
-            <span class="n">cost_term</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_lcoe</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">power_allocation_valid</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># shape (S, T)</span>
+            <span class="n">cost_term</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">list_lcoe</span> <span class="o">*</span> <span class="n">power_allocation_valid</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="n">cost_term</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()(</span><span class="n">cost_term</span><span class="p">)</span>
             <span class="c1"># econ_term for sinks</span>
             <span class="n">econ_term</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_econ_coefficient</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()(</span><span class="n">U</span><span class="p">)</span>                     <span class="c1"># shape (D, T)</span>
             <span class="n">J</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">econ_term</span><span class="p">)</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">cost_term</span><span class="p">)</span>

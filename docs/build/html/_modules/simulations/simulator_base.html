@@ -226,24 +226,18 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../_autosummary/simulations.html">simulations</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of simulations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.gas.html">simulations.gas</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of simulations.gas</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.gas.GasPowerSimulator.html">simulations.gas.GasPowerSimulator</a></li>
-</ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.simulator_base.html">simulations.simulator_base</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of simulations.simulator_base</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.simulator_base.html">simulations.simulator_base</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of simulations.simulator_base</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.simulator_base.SimulatorBase.html">simulations.simulator_base.SimulatorBase</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.sink_demand.html">simulations.sink_demand</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of simulations.sink_demand</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.sink_demand.SinkPowerDemandSimulator.html">simulations.sink_demand.SinkPowerDemandSimulator</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.sink_simulators.html">simulations.sink_simulators</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of simulations.sink_simulators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.sink_simulators.CityPowerDemandSimulator.html">simulations.sink_simulators.CityPowerDemandSimulator</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.solar.html">simulations.solar</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of simulations.solar</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.solar.SolarPowerSimulator.html">simulations.solar.SolarPowerSimulator</a></li>
-</ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.wind.html">simulations.wind</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of simulations.wind</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.wind.WindPowerSimulator.html">simulations.wind.WindPowerSimulator</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.source_simulators.html">simulations.source_simulators</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of simulations.source_simulators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.source_simulators.GasPowerSimulator.html">simulations.source_simulators.GasPowerSimulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.source_simulators.SolarPowerSimulator.html">simulations.source_simulators.SolarPowerSimulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.source_simulators.WindPowerSimulator.html">simulations.source_simulators.WindPowerSimulator</a></li>
 </ul>
 </li>
 </ul>
@@ -283,106 +277,247 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>Source code for simulations.simulator_base</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">abstractmethod</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">simulator_base.py</span>
+<span class="sd">=================</span>
+
+<span class="sd">This module defines a base class, `SimulatorBase`, for simulating power </span>
+<span class="sd">outputs and associated costs over a specified time range. The class </span>
+<span class="sd">includes functionality for generating skewed random numbers, plotting </span>
+<span class="sd">power data, and accessing specific hourly cost/power/demand values.</span>
+
+<span class="sd">Classes</span>
+<span class="sd">-------</span>
+<span class="sd">SimulatorBase</span>
+<span class="sd">    The abstract base class for all power generator simulations.</span>
+
+<span class="sd">Examples</span>
+<span class="sd">--------</span>
+<span class="sd">&gt;&gt;&gt; from simulator_base import SimulatorBase</span>
+<span class="sd">&gt;&gt;&gt; # Since SimulatorBase is abstract, you would typically inherit from it:</span>
+<span class="sd">&gt;&gt;&gt; class ExampleSimulator(SimulatorBase):</span>
+<span class="sd">...     def power_output(self):</span>
+<span class="sd">...         # Implement the abstract method here</span>
+<span class="sd">...         pass</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">abstractmethod</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
 
 <div class="viewcode-block" id="SimulatorBase">
 <a class="viewcode-back" href="../../_autosummary/simulations.simulator_base.SimulatorBase.html#simulations.simulator_base.SimulatorBase">[docs]</a>
-<span class="k">class</span> <span class="nc">SimulatorBase</span><span class="p">():</span>
+<span class="k">class</span> <span class="nc">SimulatorBase</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Simulator base class for source node power simulation.</span>
 
+<span class="sd">    This abstract class provides attributes and methods common to</span>
+<span class="sd">    all power source simulators, including:</span>
+<span class="sd">      - a time range for the simulation,</span>
+<span class="sd">      - arrays for power output and associated costs,</span>
+<span class="sd">      - methods for plotting and data retrieval.</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    time_range : float, optional</span>
-<span class="sd">        The time frame over which to generate simulator values</span>
+<span class="sd">    time_range : int, optional</span>
+<span class="sd">        The number of hours over which to generate simulator values.</span>
+<span class="sd">        Defaults to 24.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    time_range : float</span>
-<span class="sd">        The time frame for the simulation</span>
-<span class="sd">    power_outputs : np.array</span>
-<span class="sd">        Array of power output values over time range</span>
-<span class="sd">    cost_outputs : np.array</span>
-<span class="sd">        Array of the power costs over time range </span>
-<span class="sd">    capital_costs : int </span>
-<span class="sd">        Initial cost for infrastructure </span>
+<span class="sd">    time_range : int</span>
+<span class="sd">        The number of hours for the simulation.</span>
+<span class="sd">    power_outputs : ndarray or None</span>
+<span class="sd">        Array of power output values over the time range (in kW).</span>
+<span class="sd">        Populated by the child class&#39;s `power_output` method.</span>
+<span class="sd">    cost_outputs : ndarray or None</span>
+<span class="sd">        Array of the power costs over the time range (in USD).</span>
+<span class="sd">        Populated by the child class&#39;s `power_output` method.</span>
+<span class="sd">    capital_cost : float or None</span>
+<span class="sd">        The initial infrastructure cost (in USD), if applicable.</span>
+<span class="sd">    power_demands : ndarray or None</span>
+<span class="sd">        Array of the power demand values over the time range, if relevant</span>
+<span class="sd">        (for simulation classes that handle demand as well).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
 
 <div class="viewcode-block" id="SimulatorBase.__init__">
 <a class="viewcode-back" href="../../_autosummary/simulations.simulator_base.SimulatorBase.html#simulations.simulator_base.SimulatorBase.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_range</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">24</span><span class="p">):</span> 
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_range</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">24</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the simulator base class.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        time_range : int, optional</span>
+<span class="sd">            The number of hours for which the simulation runs. </span>
+<span class="sd">            Defaults to 24.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">time_range</span> <span class="o">=</span> <span class="n">time_range</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">power_outputs</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cost_outputs</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">capital_cost</span> <span class="o">=</span> <span class="kc">None</span> 
-        <span class="bp">self</span><span class="o">.</span><span class="n">power_demands</span> <span class="o">=</span> <span class="kc">None</span> </div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capital_cost</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">power_demands</span> <span class="o">=</span> <span class="kc">None</span></div>
 
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">skewed_random</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">skew_factor</span><span class="o">=</span><span class="mf">0.65</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">skewed_random</span><span class="p">(</span><span class="n">low</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">high</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">skew_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.65</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generate a skewed random number of solar panels, favoring higher values.</span>
+<span class="sd">        Generate a skewed random number, favoring higher values within a range.</span>
+
+<span class="sd">        Uses a Beta distribution to skew towards higher values in the</span>
+<span class="sd">        specified range.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        low : int</span>
-<span class="sd">            Minimum value.</span>
+<span class="sd">            The minimum value of the generated random number.</span>
 <span class="sd">        high : int</span>
-<span class="sd">            Maximum value.</span>
+<span class="sd">            The maximum value of the generated random number.</span>
 <span class="sd">        skew_factor : float, optional</span>
-<span class="sd">            Skew factor, default is 0.65.</span>
+<span class="sd">            Determines the skew of the distribution. </span>
+<span class="sd">            A higher skew factor (&gt; 0.5) biases towards the higher end of the range.</span>
+<span class="sd">            Default is 0.65.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        int</span>
 <span class="sd">            A randomly generated integer within the specified range.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">low</span> <span class="o">+</span> <span class="p">(</span><span class="n">high</span> <span class="o">-</span> <span class="n">low</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">skew_factor</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">skew_factor</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="p">))</span>
- 
-     
-    <span class="k">def</span> <span class="nf">plot_power_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">savepath</span><span class="p">):</span>
-                
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span>
+            <span class="n">low</span>
+            <span class="o">+</span> <span class="p">(</span><span class="n">high</span> <span class="o">-</span> <span class="n">low</span><span class="p">)</span>
+            <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">beta</span><span class="p">(</span><span class="n">skew_factor</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">skew_factor</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">plot_power_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">savepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot the power output data and save the figure.</span>
+
+<span class="sd">        This method creates a simple line plot of hourly power output </span>
+<span class="sd">        over the specified time range. It also prints the total capital </span>
+<span class="sd">        cost, hourly cost array, and hourly power output array to the console.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        title : str</span>
+<span class="sd">            The title of the plot.</span>
+<span class="sd">        label : str</span>
+<span class="sd">            The label for the power output line on the plot legend.</span>
+<span class="sd">        savepath : str</span>
+<span class="sd">            The filesystem path to save the plot image as a PNG file.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        This method expects that `self.power_outputs`, `self.cost_outputs`, </span>
+<span class="sd">        and `self.capital_cost` have been populated by the subclass’s </span>
+<span class="sd">        `power_output` method before being called. Otherwise, it may </span>
+<span class="sd">        produce incorrect or empty plots.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_range</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_outputs</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_range</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">power_outputs</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
+            <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="n">label</span>
+        <span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Hour&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Power Output (kW)&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">savepath</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">)</span>
-        
-        <span class="c1"># Print cost information</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total Capital Cost: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">capital_cost</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hourly Cost Array: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cost_outputs</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hourly Power Output Array: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">power_outputs</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># Closes the figure to free memory and avoid display issues</span>
+
+        <span class="c1"># Print cost and power output information</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total Capital Cost: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">capital_cost</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hourly Cost Array: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cost_outputs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hourly Power Output Array: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">power_outputs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">power_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">power_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute the output for a given simulator</span>
+<span class="sd">        Compute the output for a given simulator (to be implemented by subclass).</span>
+
+<span class="sd">        Subclasses must define how power output and costs are calculated.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        Tuple of [np.array, np.array]</span>
-<span class="sd">            Tuple of arrays corresponding to the power output</span>
-<span class="sd">            and associated power cost  </span>
+<span class="sd">        tuple of (np.ndarray, np.ndarray)</span>
+<span class="sd">            A tuple of arrays corresponding to:</span>
+<span class="sd">              - The power output over the time range (in kW).</span>
+<span class="sd">              - The associated power cost over the time range (in USD).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> 
+        <span class="k">pass</span>
 
-    <span class="k">def</span> <span class="nf">get_cost_at_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hour</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_cost_at_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hour</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the cost at a specific hour index.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        hour : int</span>
+<span class="sd">            The hour index within the simulation time range.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            The cost at the specified hour index.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        IndexError</span>
+<span class="sd">            If the provided hour index is out of bounds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cost_outputs</span><span class="p">[</span><span class="n">hour</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">get_power_at_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hour</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span> 
+    <span class="k">def</span> <span class="nf">get_power_at_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hour</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the power output at a specific hour index.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        hour : int</span>
+<span class="sd">            The hour index within the simulation time range.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            The power output (in kW) at the specified hour index.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        IndexError</span>
+<span class="sd">            If the provided hour index is out of bounds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_outputs</span><span class="p">[</span><span class="n">hour</span><span class="p">]</span>
-    
-    <span class="k">def</span> <span class="nf">get_power_demand_at_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hour</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span> 
+
+    <span class="k">def</span> <span class="nf">get_power_demand_at_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hour</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the power demand at a specific hour index.</span>
+
+<span class="sd">        This is relevant only for simulators that also track </span>
+<span class="sd">        demand values (e.g., consumer-side simulations).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        hour : int</span>
+<span class="sd">            The hour index within the simulation time range.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            The power demand at the specified hour index.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        IndexError</span>
+<span class="sd">            If the provided hour index is out of bounds or if</span>
+<span class="sd">            `power_demands` is None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_demands</span><span class="p">[</span><span class="n">hour</span><span class="p">]</span></div>
 
-
-        
 </pre></div>
         </article>
       </div>

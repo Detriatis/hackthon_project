@@ -226,24 +226,18 @@
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../_autosummary/simulations.html">simulations</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of simulations</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.gas.html">simulations.gas</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of simulations.gas</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.gas.GasPowerSimulator.html">simulations.gas.GasPowerSimulator</a></li>
-</ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.simulator_base.html">simulations.simulator_base</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of simulations.simulator_base</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.simulator_base.html">simulations.simulator_base</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of simulations.simulator_base</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.simulator_base.SimulatorBase.html">simulations.simulator_base.SimulatorBase</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.sink_demand.html">simulations.sink_demand</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of simulations.sink_demand</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.sink_demand.SinkPowerDemandSimulator.html">simulations.sink_demand.SinkPowerDemandSimulator</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.sink_simulators.html">simulations.sink_simulators</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of simulations.sink_simulators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.sink_simulators.CityPowerDemandSimulator.html">simulations.sink_simulators.CityPowerDemandSimulator</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.solar.html">simulations.solar</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of simulations.solar</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.solar.SolarPowerSimulator.html">simulations.solar.SolarPowerSimulator</a></li>
-</ul>
-</li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.wind.html">simulations.wind</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of simulations.wind</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.wind.WindPowerSimulator.html">simulations.wind.WindPowerSimulator</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/simulations.source_simulators.html">simulations.source_simulators</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of simulations.source_simulators</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.source_simulators.GasPowerSimulator.html">simulations.source_simulators.GasPowerSimulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.source_simulators.SolarPowerSimulator.html">simulations.source_simulators.SolarPowerSimulator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/simulations.source_simulators.WindPowerSimulator.html">simulations.source_simulators.WindPowerSimulator</a></li>
 </ul>
 </li>
 </ul>
@@ -284,19 +278,42 @@
         <article role="main" id="furo-main-content">
           <h1>Source code for graph_elements.graph</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">graph.py</span>
+<span class="sd">========</span>
+
 <span class="sd">This module provides the Graph class for constructing and managing</span>
 <span class="sd">directed or undirected graphs of Node objects and their Connections.</span>
+
+<span class="sd">Examples</span>
+<span class="sd">--------</span>
+<span class="sd">&gt;&gt;&gt; from graph import Graph</span>
+<span class="sd">&gt;&gt;&gt; from nodes import Node</span>
+<span class="sd">&gt;&gt;&gt;</span>
+<span class="sd">&gt;&gt;&gt; # Create a simple graph</span>
+<span class="sd">&gt;&gt;&gt; g = Graph(directed=False)</span>
+<span class="sd">&gt;&gt;&gt; n1 = Node(node_id=&quot;A&quot;, time_range=24, cartesian_coordinates=(0, 0))</span>
+<span class="sd">&gt;&gt;&gt; n2 = Node(node_id=&quot;B&quot;, time_range=24, cartesian_coordinates=(1, 1))</span>
+<span class="sd">&gt;&gt;&gt; g.add_node(n1)</span>
+<span class="sd">&gt;&gt;&gt; g.add_node(n2)</span>
+<span class="sd">&gt;&gt;&gt; g.add_connection(&quot;A&quot;, &quot;B&quot;, power_capacity=100)</span>
+<span class="sd">&gt;&gt;&gt; adj_matrix, index_map = g.construct_adjacency()</span>
+<span class="sd">&gt;&gt;&gt; print(adj_matrix)</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">.nodes</span> <span class="kn">import</span> <span class="n">SinkNode</span><span class="p">,</span> <span class="n">SourceNode</span><span class="p">,</span> <span class="n">Node</span>
 <span class="kn">from</span> <span class="nn">.connections</span> <span class="kn">import</span> <span class="n">Connection</span>
 
+
 <div class="viewcode-block" id="Graph">
 <a class="viewcode-back" href="../../_autosummary/graph_elements.graph.Graph.html#graph_elements.graph.Graph">[docs]</a>
 <span class="k">class</span> <span class="nc">Graph</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A directed or undirected graph of nodes and connections.</span>
+
+<span class="sd">    This class stores nodes (in a dictionary) and the connections (in a list).</span>
+<span class="sd">    It provides methods to add nodes, add connections, and build an adjacency</span>
+<span class="sd">    matrix for various graph operations.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -311,12 +328,21 @@
 <span class="sd">    connections : list of Connection</span>
 <span class="sd">        A list of Connection objects between nodes.</span>
 <span class="sd">    directed : bool</span>
-<span class="sd">        Indicates whether the graph is directed.</span>
+<span class="sd">        Indicates whether the graph is directed (True) or undirected (False).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Graph.__init__">
 <a class="viewcode-back" href="../../_autosummary/graph_elements.graph.Graph.html#graph_elements.graph.Graph.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the graph with optional directionality.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        directed : bool, optional</span>
+<span class="sd">            Set to True for a directed graph; False for undirected.</span>
+<span class="sd">            Default is False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connections</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">directed</span> <span class="o">=</span> <span class="n">directed</span></div>
@@ -329,7 +355,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        node : Node</span>
-<span class="sd">            A node object to be added.</span>
+<span class="sd">            The node object to be added.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -353,23 +379,41 @@
         <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">node_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span>
 
-    <span class="k">def</span> <span class="nf">get_sinks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="n">sink_nodes</span> <span class="o">=</span> <span class="p">[]</span> 
-        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span> 
+    <span class="k">def</span> <span class="nf">get_sinks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve all sink nodes from the graph.</span>
+
+<span class="sd">        A sink node is identified by being an instance of `SinkNode`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of SinkNode</span>
+<span class="sd">            A list containing all sink nodes in the graph.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sink_nodes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">SinkNode</span><span class="p">):</span>
                 <span class="n">sink_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-
         <span class="k">return</span> <span class="n">sink_nodes</span>
 
-    <span class="k">def</span> <span class="nf">get_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="n">source_nodes</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">:</span> 
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">SourceNode</span><span class="p">):</span>
-                <span class="n">source_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> 
+    <span class="k">def</span> <span class="nf">get_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve all source nodes from the graph.</span>
 
+<span class="sd">        A source node is identified by being an instance of `SourceNode`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of SourceNode</span>
+<span class="sd">            A list containing all source nodes in the graph.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">source_nodes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">SourceNode</span><span class="p">):</span>
+                <span class="n">source_nodes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">source_nodes</span>
-    
-    <span class="k">def</span> <span class="nf">add_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_a_id</span><span class="p">,</span> <span class="n">node_b_id</span><span class="p">,</span> <span class="n">power_capacity</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">add_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_a_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">node_b_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">power_capacity</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a connection between two existing nodes in the graph.</span>
 
@@ -379,9 +423,8 @@
 <span class="sd">            The source node&#39;s ID.</span>
 <span class="sd">        node_b_id : str</span>
 <span class="sd">            The destination node&#39;s ID.</span>
-<span class="sd">        weight : float, optional</span>
-<span class="sd">            A parameter indicating, for instance, the &quot;cost&quot; or &quot;capacity&quot;</span>
-<span class="sd">            of the connection. Defaults to 1.0.</span>
+<span class="sd">        power_capacity : float</span>
+<span class="sd">            The power capacity (or &quot;weight&quot;) of the connection.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -402,12 +445,11 @@
 
         <span class="c1"># Update adjacency in each node</span>
         <span class="n">node_a</span><span class="o">.</span><span class="n">set_connection</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">node_b_id</span><span class="p">)</span>
-        
+
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">directed</span><span class="p">:</span>
-            <span class="c1"># In undirected graphs, we also record the connection on node_b</span>
+            <span class="c1"># In undirected graphs, record the connection on node_b as well</span>
             <span class="n">node_b</span><span class="o">.</span><span class="n">set_connection</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">node_a_id</span><span class="p">)</span>
-            
-        
+
     <span class="k">def</span> <span class="nf">get_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieve a node object by its ID.</span>
@@ -436,23 +478,25 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        list of Connection</span>
-<span class="sd">            A list of connections from the specified node.</span>
+<span class="sd">            A list of connections originating from or associated with</span>
+<span class="sd">            the specified node.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        KeyError</span>
 <span class="sd">            If the node_id does not exist in the graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span>  <span class="c1"># Will raise KeyError if missing</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">node_id</span><span class="p">]</span>  <span class="c1"># Raises KeyError if missing</span>
         <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">connections</span>
 
     <span class="k">def</span> <span class="nf">construct_adjacency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Construct an adjacency matrix representing the graph.</span>
 
-<span class="sd">        For each connection, the matrix entry [i, j] is set to the weight</span>
-<span class="sd">        if the graph is directed or to the weight in both [i, j] and [j, i]</span>
-<span class="sd">        if undirected.</span>
+<span class="sd">        For each connection, the matrix entry [i, j] is set to the</span>
+<span class="sd">        `power_capacity` of the connection. In a directed graph,</span>
+<span class="sd">        entry [i, j] will be nonzero if there is a connection from i to j.</span>
+<span class="sd">        In an undirected graph, both [i, j] and [j, i] are set to this value.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -464,7 +508,7 @@
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
         <span class="n">adjacency_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
-        <span class="c1"># Create an index mapping</span>
+        <span class="c1"># Create an index mapping for node_id -&gt; matrix index</span>
         <span class="n">node_index</span> <span class="o">=</span> <span class="p">{</span><span class="n">node_id</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">node_id</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">keys</span><span class="p">())}</span>
 
         <span class="k">for</span> <span class="n">connection</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">:</span>
@@ -472,11 +516,10 @@
             <span class="n">a_id</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">node_a</span><span class="o">.</span><span class="n">node_id</span>
             <span class="n">b_id</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">node_b</span><span class="o">.</span><span class="n">node_id</span>
             <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">node_index</span><span class="p">[</span><span class="n">a_id</span><span class="p">],</span> <span class="n">node_index</span><span class="p">[</span><span class="n">b_id</span><span class="p">]</span>
-            
+
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">directed</span><span class="p">:</span>
-                <span class="c1"># Optional logic for directed weighting</span>
-                <span class="n">adjacency_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connection</span><span class="o">.</span><span class="n">node_a</span><span class="p">,</span> <span class="n">SourceNode</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
-                <span class="n">adjacency_matrix</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connection</span><span class="o">.</span><span class="n">node_a</span><span class="p">,</span> <span class="n">SourceNode</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+                <span class="c1"># Optionally, you could further customize how directed edges work</span>
+                <span class="n">adjacency_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">adjacency_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span>
                 <span class="n">adjacency_matrix</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span>
