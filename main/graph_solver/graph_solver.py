@@ -106,7 +106,7 @@ class GraphSolver:
 
             # 4) Constraint penalties
             # supply violation: sum across D, T for each source -> compare to total_power
-            supply_violations = power_allocation_valid.sum(dim=1) - self.list_total_power[:, None]
+            supply_violations = power_allocation_valid.sum(dim=1) - self.list_total_power
             print(f"Supply_violations: {supply_violations}")
             print(f"list_total_power: {self.list_total_power / power_allocation_valid.sum(dim=1) }")
             L_supply = self.lambda_n * torch.sum(torch.relu(supply_violations)**2)
