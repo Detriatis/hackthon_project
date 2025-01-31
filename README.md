@@ -1,12 +1,24 @@
 # Power Supply Network Optimization
 
+# Guide to the code
+
+## Installation
+
+`pip install --editable .`
+
+## Get started
+
+`python ui/app.py`
+
+
+
 ## Introduction
 
 This project focuses on optimizing a power supply network between power sources and sinks. In reality, the connections between power plants and cities can be represented as a network, where edges denote the transmission routes of electricity.
 
-A simplified model considers power plants as **sources** and cities as **sinks**, with transmission lines forming the network structure. The objective is to optimize the distribution of power to improve efficiency, minimize losses, and ensure stability.
+A simplified model considers power plants as **sources** and cities as **sinks**, with transmission lines forming the network structure. The objective is to optimize the distribution of power to improve efficiency, minimize losses, and ensure stability. An example of this interconnected power supply graph is shown below.
 
-![Example Network Diagram](visualisation.png)
+![Example Network Diagram](visuals/visualisation.png)
 ---
 
 ## Dynamic Pricing and Supply Optimization
@@ -15,9 +27,14 @@ In real-world scenarios, the cost of power generation varies throughout the day 
 
 Additionally, the model incorporates **economic costs associated with insufficient power supply**. This introduces a trade-off between **minimizing supply costs** and **mitigating economic losses due to power shortages**.
 
+For easier understanding, an example of the mathematical formulation of 2 x 2 cases is shown below. Note that this project would allow an easy scale up to much larger graphs than 2 x 2 and with a long time span.
+
 ---
 
 ## Mathematical Formulation (2x2 Case)
+
+
+![2 by 2 Diagram](visuals/2by2.png)
 
 The optimization problem for a **two-sources, two-sinks** scenario is formulated as follows:
 
@@ -87,7 +104,4 @@ The gradient descent update steps iteratively adjust $P_{ij}(t)$ values to minim
 
 ---
 
-## Example Network Representation
-
-Below is an example representation of the **two-sources, two-sinks** network:
 
