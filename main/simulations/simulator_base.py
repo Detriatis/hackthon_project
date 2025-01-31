@@ -233,3 +233,6 @@ class SimulatorBase:
             `power_demands` is None.
         """
         return self.power_demands[hour]
+
+    def get_costs(self, power, lcoe): 
+        return power * lcoe 

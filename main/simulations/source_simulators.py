@@ -106,12 +106,13 @@ class SolarPowerSimulator(SimulatorBase):
         irradiance = np.maximum(0, np.sin(time) + np.random.normal(0, 0.05, self.hours))
 
         # Power output (kW) based on irradiance
-        power_outputs = (peak_power * irradiance) / 1e6 
+        power_outputs = (peak_power * irradiance) 
 
         # Capital cost and maintenance cost
         capital_cost = num_panels * 300       # Example: $300 per panel
-        maintenance_cost_per_mwh = 5         # Example: $5 per MWh
-        cost_outputs = (power_outputs / 1000) * (maintenance_cost_per_mwh * 1000)
+        
+        lcoe = 45
+        cost_outputs = self.get_costs(power_outputs, lcoe)
 
         # Store internal states
         self.num_panels = num_panels
@@ -208,13 +209,14 @@ class GasPowerSimulator(SimulatorBase):
         peak_power = self.skewed_random(410, 2200) * 1000  # Peak power in kW
 
         # Gas plants typically run at a constant output (no variation)
-        power_outputs = np.full(self.hours, peak_power) / 1e6
+        power_outputs = np.full(self.hours, peak_power) 
 
         # Costs
         capital_cost = peak_power * 500        # Example: $500 per kW capacity
-        maintenance_cost_per_mwh = 50         # Higher O&M cost than renewables
-        cost_outputs = (power_outputs / 1000) * (maintenance_cost_per_mwh * 1000)
-
+        lcoe = 80    # dollar per kw hour
+        
+        cost_outputs = self.get_costs(power_outputs, lcoe) 
+        
         # Store internal states
         self.power_outputs = power_outputs
         self.capital_cost = capital_cost
@@ -337,9 +339,13 @@ class WindPowerSimulator(SimulatorBase):
                 power_outputs[i] = 2300
             else:
                 # Assume a cubic relationship up to rated speed
-                power_outputs[i] = ((2300 / 13**3) * wind_speeds[i]**3) / 1e6
+                power_outputs[i] = ((2300 / 13**3) * wind_speeds[i]**3)
+        if self.offshore:
+            lcoe = 75
+        else:
+            lcoe = 35
 
-            cost_outputs[i] = (power_outputs[i] / 1000) * (maintenance_cost_per_mwh * 1000)
+        cost_outputs = self.get_costs(power_outputs, lcoe)
 
         # Scale by the number of turbines
         power_outputs *= num_turbines
