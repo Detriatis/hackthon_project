@@ -1,5 +1,31 @@
-﻿graph\_elements.graph
+graph\_elements.graph
 =====================
 
 .. automodule:: graph_elements.graph
-   :members:
+  
+   
+   
+   
+
+
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template:
+   
+      Graph
+   
+   
+
+   
+   
+   
+
+
+

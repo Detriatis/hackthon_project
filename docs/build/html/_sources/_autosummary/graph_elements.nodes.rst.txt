@@ -1,5 +1,36 @@
-﻿graph\_elements.nodes
+graph\_elements.nodes
 =====================
 
 .. automodule:: graph_elements.nodes
-   :members:
+  
+   
+   
+   
+
+
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template:
+   
+      Gas
+      Node
+      SinkNode
+      Solar
+      SourceNode
+      Wind
+   
+   
+
+   
+   
+   
+
+
+

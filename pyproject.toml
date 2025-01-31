@@ -10,8 +10,5 @@ dependencies = [
     "scipy>=1.15.1"
 ]
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["main"]
-exclude = []
-namespaces = false
+[tool.setuptools]
+packages = ["main", "main.graph_elements", "main.simulations", "main.graph_solver"]

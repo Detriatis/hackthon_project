@@ -1,5 +1,31 @@
-﻿graph\_elements.connections
+graph\_elements.connections
 ===========================
 
 .. automodule:: graph_elements.connections
-   :members:
+  
+   
+   
+   
+
+
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template:
+   
+      Connection
+   
+   
+
+   
+   
+   
+
+
+

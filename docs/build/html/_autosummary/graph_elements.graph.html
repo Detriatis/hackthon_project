@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="graph_elements.nodes" href="graph_elements.nodes.html" /><link rel="prev" title="graph_elements.connections" href="graph_elements.connections.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="graph_elements.graph.Graph" href="graph_elements.graph.Graph.html" /><link rel="prev" title="graph_elements.connections.Connection" href="graph_elements.connections.Connection.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
         <title>graph_elements.graph - Hackathon Project 0 documentation</title>
@@ -178,7 +178,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -198,17 +198,27 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+  <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="graph_elements.html">graph_elements</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of graph_elements</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="graph_elements.connections.html">graph_elements.connections</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">graph_elements.graph</a></li>
-<li class="toctree-l2"><a class="reference internal" href="graph_elements.nodes.html">graph_elements.nodes</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="graph_elements.connections.html">graph_elements.connections</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of graph_elements.connections</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="graph_elements.connections.Connection.html">graph_elements.connections.Connection</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="graph_elements.connections.html">graph_elements.connections</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">graph_elements.graph</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graph_elements.nodes.html">graph_elements.nodes</a></li>
+<li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">graph_elements.graph</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of graph_elements.graph</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="graph_elements.graph.Graph.html">graph_elements.graph.Graph</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="graph_elements.nodes.html">graph_elements.nodes</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of graph_elements.nodes</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="graph_elements.nodes.Gas.html">graph_elements.nodes.Gas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graph_elements.nodes.Node.html">graph_elements.nodes.Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graph_elements.nodes.SinkNode.html">graph_elements.nodes.SinkNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graph_elements.nodes.Solar.html">graph_elements.nodes.Solar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graph_elements.nodes.SourceNode.html">graph_elements.nodes.SourceNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graph_elements.nodes.Wind.html">graph_elements.nodes.Wind</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -243,7 +253,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -253,156 +263,16 @@
 <span id="graph-elements-graph"></span><h1>graph_elements.graph<a class="headerlink" href="#module-graph_elements.graph" title="Link to this heading">¶</a></h1>
 <p>This module provides the Graph class for constructing and managing
 directed or undirected graphs of Node objects and their Connections.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="graph_elements.graph.Graph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">graph_elements.graph.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_elements/graph.html#Graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_elements.graph.Graph" title="Link to this definition">¶</a></dt>
-<dd><p>A directed or undirected graph of nodes and connections.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>directed</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, construct a directed graph; otherwise undirected.
-Defaults to False.</p>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="graph_elements.graph.Graph.nodes">
-<span class="sig-name descname"><span class="pre">nodes</span></span><a class="headerlink" href="#graph_elements.graph.Graph.nodes" title="Link to this definition">¶</a></dt>
-<dd><p>A dictionary of node objects, keyed by their node_id.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict of str -&gt; Node</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="graph_elements.graph.Graph.connections">
-<span class="sig-name descname"><span class="pre">connections</span></span><a class="headerlink" href="#graph_elements.graph.Graph.connections" title="Link to this definition">¶</a></dt>
-<dd><p>A list of Connection objects between nodes.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list of <a class="reference internal" href="graph_elements.connections.html#graph_elements.connections.Connection" title="graph_elements.connections.Connection">Connection</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="graph_elements.graph.Graph.directed">
-<span class="sig-name descname"><span class="pre">directed</span></span><a class="headerlink" href="#graph_elements.graph.Graph.directed" title="Link to this definition">¶</a></dt>
-<dd><p>Indicates whether the graph is directed.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="graph_elements.graph.Graph.add_connection">
-<span class="sig-name descname"><span class="pre">add_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_a_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_b_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">power_capacity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_elements/graph.html#Graph.add_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_elements.graph.Graph.add_connection" title="Link to this definition">¶</a></dt>
-<dd><p>Add a connection between two existing nodes in the graph.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>node_a_id</strong> (<em>str</em>) – The source node’s ID.</p></li>
-<li><p><strong>node_b_id</strong> (<em>str</em>) – The destination node’s ID.</p></li>
-<li><p><strong>weight</strong> (<em>float</em><em>, </em><em>optional</em>) – A parameter indicating, for instance, the “cost” or “capacity”
-of the connection. Defaults to 1.0.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If either node_a_id or node_b_id is not found in the graph.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="graph_elements.graph.Graph.add_node">
-<span class="sig-name descname"><span class="pre">add_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="graph_elements.nodes.html#graph_elements.nodes.Node" title="graph_elements.nodes.Node"><span class="pre">Node</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_elements/graph.html#Graph.add_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_elements.graph.Graph.add_node" title="Link to this definition">¶</a></dt>
-<dd><p>Add a single node to the graph.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>node</strong> (<a class="reference internal" href="graph_elements.nodes.html#graph_elements.nodes.Node" title="graph_elements.nodes.Node"><em>Node</em></a>) – A node object to be added.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="graph_elements.graph.Graph.add_nodes">
-<span class="sig-name descname"><span class="pre">add_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="graph_elements.nodes.html#graph_elements.nodes.Node" title="graph_elements.nodes.Node"><span class="pre">Node</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_elements/graph.html#Graph.add_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_elements.graph.Graph.add_nodes" title="Link to this definition">¶</a></dt>
-<dd><p>Add multiple nodes to the graph.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>nodes</strong> (<em>list</em><em> of </em><a class="reference internal" href="graph_elements.nodes.html#graph_elements.nodes.Node" title="graph_elements.nodes.Node"><em>Node</em></a>) – A list of node objects to be added.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="graph_elements.graph.Graph.construct_adjacency">
-<span class="sig-name descname"><span class="pre">construct_adjacency</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/graph_elements/graph.html#Graph.construct_adjacency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_elements.graph.Graph.construct_adjacency" title="Link to this definition">¶</a></dt>
-<dd><p>Construct an adjacency matrix representing the graph.</p>
-<p>For each connection, the matrix entry [i, j] is set to the weight
-if the graph is directed or to the weight in both [i, j] and [j, i]
-if undirected.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><ul class="simple">
-<li><p><strong>adjacency_matrix</strong> (<em>np.ndarray</em>) – A 2D NumPy array where rows and columns are indexed by nodes.</p></li>
-<li><p><strong>node_index</strong> (<em>dict of str -&gt; int</em>) – A mapping from node IDs to their row/column index in the matrix.</p></li>
-</ul>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="graph_elements.graph.Graph.get_neighbors">
-<span class="sig-name descname"><span class="pre">get_neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="graph_elements.connections.html#graph_elements.connections.Connection" title="graph_elements.connections.Connection"><span class="pre">Connection</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/graph_elements/graph.html#Graph.get_neighbors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_elements.graph.Graph.get_neighbors" title="Link to this definition">¶</a></dt>
-<dd><p>Retrieve all connections for a given node.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>node_id</strong> (<em>str</em>) – The ID of the node whose neighbors to retrieve.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of connections from the specified node.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list of <a class="reference internal" href="graph_elements.connections.html#graph_elements.connections.Connection" title="graph_elements.connections.Connection">Connection</a></p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>KeyError</strong> – If the node_id does not exist in the graph.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="graph_elements.graph.Graph.get_node">
-<span class="sig-name descname"><span class="pre">get_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="graph_elements.nodes.html#graph_elements.nodes.Node" title="graph_elements.nodes.Node"><span class="pre">Node</span></a></span></span><a class="reference internal" href="../_modules/graph_elements/graph.html#Graph.get_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graph_elements.graph.Graph.get_node" title="Link to this definition">¶</a></dt>
-<dd><p>Retrieve a node object by its ID.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>node_id</strong> (<em>str</em>) – The ID of the node to retrieve.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The node object if found, otherwise None.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="graph_elements.nodes.html#graph_elements.nodes.Node" title="graph_elements.nodes.Node">Node</a> or None</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+<p class="rubric">Classes</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="graph_elements.graph.Graph.html#graph_elements.graph.Graph" title="graph_elements.graph.Graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Graph</span></code></a>([directed])</p></td>
+<td><p>A directed or undirected graph of nodes and connections.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 
         </article>
@@ -410,23 +280,23 @@ if undirected.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="graph_elements.nodes.html">
+          <a class="next-page" href="graph_elements.graph.Graph.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">graph_elements.nodes</div>
+                <div class="title">graph_elements.graph.Graph</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="graph_elements.connections.html">
+          <a class="prev-page" href="graph_elements.connections.Connection.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">graph_elements.connections</div>
+                <div class="title">graph_elements.connections.Connection</div>
                 
               </div>
             </a>
@@ -434,7 +304,7 @@ if undirected.</p>
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 0, Michael Dodds, Oscar Hill, Stan Xio, Alex Higgins
+                Copyright &#169; 0, Michael Dodds, Oscar Hill, Stan Xio, Alex Higginbottom
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             
@@ -448,38 +318,8 @@ if undirected.</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">graph_elements.graph</a><ul>
-<li><a class="reference internal" href="#graph_elements.graph.Graph"><code class="docutils literal notranslate"><span class="pre">Graph</span></code></a><ul>
-<li><a class="reference internal" href="#graph_elements.graph.Graph.nodes"><code class="docutils literal notranslate"><span class="pre">Graph.nodes</span></code></a></li>
-<li><a class="reference internal" href="#graph_elements.graph.Graph.connections"><code class="docutils literal notranslate"><span class="pre">Graph.connections</span></code></a></li>
-<li><a class="reference internal" href="#graph_elements.graph.Graph.directed"><code class="docutils literal notranslate"><span class="pre">Graph.directed</span></code></a></li>
-<li><a class="reference internal" href="#graph_elements.graph.Graph.add_connection"><code class="docutils literal notranslate"><span class="pre">Graph.add_connection()</span></code></a></li>
-<li><a class="reference internal" href="#graph_elements.graph.Graph.add_node"><code class="docutils literal notranslate"><span class="pre">Graph.add_node()</span></code></a></li>
-<li><a class="reference internal" href="#graph_elements.graph.Graph.add_nodes"><code class="docutils literal notranslate"><span class="pre">Graph.add_nodes()</span></code></a></li>
-<li><a class="reference internal" href="#graph_elements.graph.Graph.construct_adjacency"><code class="docutils literal notranslate"><span class="pre">Graph.construct_adjacency()</span></code></a></li>
-<li><a class="reference internal" href="#graph_elements.graph.Graph.get_neighbors"><code class="docutils literal notranslate"><span class="pre">Graph.get_neighbors()</span></code></a></li>
-<li><a class="reference internal" href="#graph_elements.graph.Graph.get_node"><code class="docutils literal notranslate"><span class="pre">Graph.get_node()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>

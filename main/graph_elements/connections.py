@@ -41,33 +41,7 @@ class Connection:
 
     def __init__(self, node_a: Node, node_b: Node, 
              power_capacity: float):
-        """
-        Initializes a Connection between two nodes.
-
-        Parameters
-        ----------
-        node_a : Node
-            The source node.
-        node_b : Node
-            The destination node.
-        power_capacity : float
-            The power transmission limit for this connection.
-        weight_function : Callable[[Node, Node], float]
-            A function to compute power transmission efficiency.
-
-        Attributes
-        ----------
-        node_a : Node
-            The source node of the connection.
-        node_b : Node
-            The destination node of the connection.
-        weight : float
-            The power efficiency factor (considering conversion loss and distance loss).
-        power_capacity : float
-            The maximum power this connection can handle.
-        power : float
-            The current power being transmitted.
-        """
+         
         self.node_a = node_a
         self.node_b = node_b
         self.power_capacity = power_capacity

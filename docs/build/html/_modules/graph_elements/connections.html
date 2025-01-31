@@ -197,17 +197,27 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+  <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../_autosummary/graph_elements.html">graph_elements</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of graph_elements</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/graph_elements.connections.html">graph_elements.connections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/graph_elements.graph.html">graph_elements.graph</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.html">graph_elements.nodes</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/graph_elements.connections.html">graph_elements.connections</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of graph_elements.connections</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.connections.Connection.html">graph_elements.connections.Connection</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/graph_elements.connections.html">graph_elements.connections</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/graph_elements.graph.html">graph_elements.graph</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.html">graph_elements.nodes</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/graph_elements.graph.html">graph_elements.graph</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of graph_elements.graph</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.graph.Graph.html">graph_elements.graph.Graph</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.html">graph_elements.nodes</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of graph_elements.nodes</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.Gas.html">graph_elements.nodes.Gas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.Node.html">graph_elements.nodes.Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.SinkNode.html">graph_elements.nodes.SinkNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.Solar.html">graph_elements.nodes.Solar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.SourceNode.html">graph_elements.nodes.SourceNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.Wind.html">graph_elements.nodes.Wind</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -256,7 +266,7 @@
 <span class="kn">from</span> <span class="nn">.nodes</span> <span class="kn">import</span> <span class="n">Node</span>
 
 <div class="viewcode-block" id="Connection">
-<a class="viewcode-back" href="../../_autosummary/graph_elements.connections.html#graph_elements.connections.Connection">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/graph_elements.connections.Connection.html#graph_elements.connections.Connection">[docs]</a>
 <span class="k">class</span> <span class="nc">Connection</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A connection (edge) between two nodes in a graph.</span>
@@ -286,45 +296,20 @@
 <span class="sd">        Current power being channeled by connection.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+<div class="viewcode-block" id="Connection.__init__">
+<a class="viewcode-back" href="../../_autosummary/graph_elements.connections.Connection.html#graph_elements.connections.Connection.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_a</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">node_b</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> 
              <span class="n">power_capacity</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initializes a Connection between two nodes.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        node_a : Node</span>
-<span class="sd">            The source node.</span>
-<span class="sd">        node_b : Node</span>
-<span class="sd">            The destination node.</span>
-<span class="sd">        power_capacity : float</span>
-<span class="sd">            The power transmission limit for this connection.</span>
-<span class="sd">        weight_function : Callable[[Node, Node], float]</span>
-<span class="sd">            A function to compute power transmission efficiency.</span>
-
-<span class="sd">        Attributes</span>
-<span class="sd">        ----------</span>
-<span class="sd">        node_a : Node</span>
-<span class="sd">            The source node of the connection.</span>
-<span class="sd">        node_b : Node</span>
-<span class="sd">            The destination node of the connection.</span>
-<span class="sd">        weight : float</span>
-<span class="sd">            The power efficiency factor (considering conversion loss and distance loss).</span>
-<span class="sd">        power_capacity : float</span>
-<span class="sd">            The maximum power this connection can handle.</span>
-<span class="sd">        power : float</span>
-<span class="sd">            The current power being transmitted.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+         
         <span class="bp">self</span><span class="o">.</span><span class="n">node_a</span> <span class="o">=</span> <span class="n">node_a</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">node_b</span> <span class="o">=</span> <span class="n">node_b</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">power_capacity</span> <span class="o">=</span> <span class="n">power_capacity</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">power</span> <span class="o">=</span> <span class="mf">0.0</span>
 
         <span class="c1"># Compute the power efficiency factor using the provided weight function (transmission_loss_weight)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transmission_loss_weight</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transmission_loss_weight</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Connection.transmission_loss_weight">
-<a class="viewcode-back" href="../../_autosummary/graph_elements.connections.html#graph_elements.connections.Connection.transmission_loss_weight">[docs]</a>
+
     <span class="k">def</span> <span class="nf">transmission_loss_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the weight based on power transmission losses:</span>
@@ -356,7 +341,6 @@
 
         <span class="c1"># Ensure efficiency never goes negative</span>
         <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">total_efficiency</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
-</div>
 
 </pre></div>
         </article>
@@ -370,7 +354,7 @@
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 0, Michael Dodds, Oscar Hill, Stan Xio, Alex Higgins
+                Copyright &#169; 0, Michael Dodds, Oscar Hill, Stan Xio, Alex Higginbottom
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

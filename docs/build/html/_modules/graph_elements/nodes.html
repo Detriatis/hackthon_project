@@ -197,17 +197,27 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+  <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../_autosummary/graph_elements.html">graph_elements</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of graph_elements</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/graph_elements.connections.html">graph_elements.connections</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/graph_elements.graph.html">graph_elements.graph</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.html">graph_elements.nodes</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/graph_elements.connections.html">graph_elements.connections</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of graph_elements.connections</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.connections.Connection.html">graph_elements.connections.Connection</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/graph_elements.connections.html">graph_elements.connections</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/graph_elements.graph.html">graph_elements.graph</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.html">graph_elements.nodes</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/graph_elements.graph.html">graph_elements.graph</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of graph_elements.graph</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.graph.Graph.html">graph_elements.graph.Graph</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.html">graph_elements.nodes</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of graph_elements.nodes</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.Gas.html">graph_elements.nodes.Gas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.Node.html">graph_elements.nodes.Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.SinkNode.html">graph_elements.nodes.SinkNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.Solar.html">graph_elements.nodes.Solar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.SourceNode.html">graph_elements.nodes.SourceNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/graph_elements.nodes.Wind.html">graph_elements.nodes.Wind</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -252,9 +262,10 @@
 <span class="kn">from</span> <span class="nn">simulations.solar</span> <span class="kn">import</span> <span class="n">SolarPowerSimulator</span>
 <span class="kn">from</span> <span class="nn">simulations.wind</span> <span class="kn">import</span> <span class="n">WindPowerSimulator</span>
 <span class="kn">from</span> <span class="nn">simulations.simulator_base</span> <span class="kn">import</span> <span class="n">SimulatorBase</span>
+<span class="kn">from</span> <span class="nn">simulations.sink_demand</span> <span class="kn">import</span> <span class="n">SinkPowerDemandSimulator</span>
 
 <div class="viewcode-block" id="Node">
-<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.html#graph_elements.nodes.Node">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.Node.html#graph_elements.nodes.Node">[docs]</a>
 <span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A basic node in the energy network.</span>
@@ -274,15 +285,16 @@
 <span class="sd">        A list of the connected nodes by node_id </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+<div class="viewcode-block" id="Node.__init__">
+<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.Node.html#graph_elements.nodes.Node.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">node_id</span> <span class="o">=</span> <span class="n">node_id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">time_range</span> <span class="o">=</span> <span class="n">time_range</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cartesian_coordinates</span> <span class="o">=</span> <span class="n">cartesian_coordinates</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connections</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">connections_ids</span> <span class="o">=</span> <span class="p">[]</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">connections_ids</span> <span class="o">=</span> <span class="p">[]</span> </div>
 
-<div class="viewcode-block" id="Node.set_connection">
-<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.html#graph_elements.nodes.Node.set_connection">[docs]</a>
+
     <span class="k">def</span> <span class="nf">set_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">node_id</span><span class="p">):</span> 
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the connection and connection_ids attribute of a node.</span>
@@ -298,12 +310,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span> 
         <span class="bp">self</span><span class="o">.</span><span class="n">connections_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node_id</span><span class="p">)</span></div>
-</div>
 
 
 
 <div class="viewcode-block" id="SinkNode">
-<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.html#graph_elements.nodes.SinkNode">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.SinkNode.html#graph_elements.nodes.SinkNode">[docs]</a>
 <span class="k">class</span> <span class="nc">SinkNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a power demand location (e.g., city, town).</span>
@@ -317,13 +328,20 @@
 <span class="sd">        if callable, called with an hour integer as the argument.</span>
 <span class="sd">    lcoe_requirement : float</span>
 <span class="sd">        Minimum required Levelized Cost of Electricity ($/MWh).</span>
+<span class="sd">    econ_coefficient : float </span>
+<span class="sd">        The level of penality applied for economic loss when power supply is under demand</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">):</span>
+<div class="viewcode-block" id="SinkNode.__init__">
+<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.SinkNode.html#graph_elements.nodes.SinkNode.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">,</span> <span class="n">econ_coefficient</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span> <span class="o">=</span> <span class="n">SinkPowerDemandSimulator</span><span class="p">(</span><span class="n">time_range</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">power_demand</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">econ_coefficient</span> <span class="o">=</span> <span class="n">econ_coefficient</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">demand_profile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_demand_series</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="SinkNode.get_demand">
-<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.html#graph_elements.nodes.SinkNode.get_demand">[docs]</a>
+
     <span class="k">def</span> <span class="nf">get_demand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hour</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the power demand at a specified hour.</span>
@@ -338,18 +356,19 @@
 <span class="sd">        float</span>
 <span class="sd">            The demand in MW at the given hour.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">demand_profile</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">demand_profile</span><span class="p">[</span><span class="n">hour</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">demand_profile</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span></div>
-
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">get_power_at_index</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span> 
+    
+    <span class="k">def</span> <span class="nf">get_demand_series</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">hourly_demand</span>
+    
     <span class="k">def</span> <span class="nf">node_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s1">&#39;sink&#39;</span></div>
 
 
 
 <div class="viewcode-block" id="SourceNode">
-<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.html#graph_elements.nodes.SourceNode">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.SourceNode.html#graph_elements.nodes.SourceNode">[docs]</a>
 <span class="k">class</span> <span class="nc">SourceNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for energy sources.</span>
@@ -358,51 +377,26 @@
 <span class="sd">    ----------</span>
 <span class="sd">    node_id : Hashable</span>
 <span class="sd">        A unique identifier for the source node.</span>
-<span class="sd">    power_output : list or callable</span>
-<span class="sd">        Hourly power output (MW). If a list, indexed by hour;</span>
-<span class="sd">        if callable, called with an hour integer as the argument.</span>
-<span class="sd">    dispatchability : float</span>
-<span class="sd">        A value in [0, 1] indicating how flexible the source is in adjusting output.</span>
-<span class="sd">    co2_per_mw : float</span>
-<span class="sd">        CO2 emissions per MW generated.</span>
-<span class="sd">    ramp_up_time : callable</span>
-<span class="sd">        A function defining how quickly the source can ramp up to full capacity.</span>
-<span class="sd">    capital_cost : float</span>
-<span class="sd">        Initial investment cost of the source.</span>
 <span class="sd">    lcoe : float</span>
 <span class="sd">        Levelized Cost of Electricity ($/MWh).</span>
-<span class="sd">    deployment_time : int or float</span>
-<span class="sd">        Time (in some unit, e.g., years) required to deploy the source.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+<div class="viewcode-block" id="SourceNode.__init__">
+<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.SourceNode.html#graph_elements.nodes.SourceNode.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">):</span>
         
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">node_id</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span> <span class="o">=</span> <span class="n">SimulatorBase</span><span class="p">(</span><span class="n">time_range</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">power_output</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lcoe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_lcoe_output_series</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_power</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_power_output_series</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="SourceNode.get_power_output">
-<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.html#graph_elements.nodes.SourceNode.get_power_output">[docs]</a>
+
     <span class="k">def</span> <span class="nf">get_power_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hour</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the power output at a specified hour.</span>
-
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        hour : int</span>
-<span class="sd">            The hour for which to retrieve output.</span>
-
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        float</span>
-<span class="sd">            The power output (MW) at the given hour</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">get_power_at_index</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span></div>
-
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_power</span><span class="p">[</span><span class="n">hour</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">get_lcoe_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hour</span><span class="p">):</span> 
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">get_cost_at_index</span><span class="p">(</span><span class="n">hour</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcoe</span><span class="p">[</span><span class="n">hour</span><span class="p">]</span> 
     
     <span class="k">def</span> <span class="nf">get_power_output_series</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">power_outputs</span>
@@ -412,7 +406,7 @@
 
 
 <div class="viewcode-block" id="Solar">
-<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.html#graph_elements.nodes.Solar">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.Solar.html#graph_elements.nodes.Solar">[docs]</a>
 <span class="k">class</span> <span class="nc">Solar</span><span class="p">(</span><span class="n">SourceNode</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A solar power source node.</span>
@@ -428,14 +422,18 @@
 <span class="sd">    lcoe : float</span>
 <span class="sd">        Levelized Cost of Electricity ($/MWh) for solar.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Solar.__init__">
+<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.Solar.html#graph_elements.nodes.Solar.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span> <span class="o">=</span> <span class="n">SolarPowerSimulator</span><span class="p">(</span><span class="n">time_range</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">power_output</span><span class="p">()</span></div>
+</div>
+
 
 
 <div class="viewcode-block" id="Wind">
-<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.html#graph_elements.nodes.Wind">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.Wind.html#graph_elements.nodes.Wind">[docs]</a>
 <span class="k">class</span> <span class="nc">Wind</span><span class="p">(</span><span class="n">SourceNode</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A wind power source node.</span>
@@ -451,16 +449,19 @@
 <span class="sd">    lcoe : float</span>
 <span class="sd">        Levelized Cost of Electricity ($/MWh) for wind.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Wind.__init__">
+<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.Wind.html#graph_elements.nodes.Wind.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">,</span> <span class="n">offshore</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span> <span class="o">=</span> <span class="n">WindPowerSimulator</span><span class="p">(</span><span class="n">time_range</span><span class="p">,</span> <span class="n">offshore</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">power_output</span><span class="p">()</span></div>
+</div>
 
 
 
 
 <div class="viewcode-block" id="Gas">
-<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.html#graph_elements.nodes.Gas">[docs]</a>
+<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.Gas.html#graph_elements.nodes.Gas">[docs]</a>
 <span class="k">class</span> <span class="nc">Gas</span><span class="p">(</span><span class="n">SourceNode</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A gas-powered source node.</span>
@@ -480,11 +481,15 @@
 <span class="sd">    lcoe : float</span>
 <span class="sd">        Levelized Cost of Electricity ($/MWh) for gas.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">time_range</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<div class="viewcode-block" id="Gas.__init__">
+<a class="viewcode-back" href="../../_autosummary/graph_elements.nodes.Gas.html#graph_elements.nodes.Gas.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">time_range</span><span class="p">,</span> <span class="n">cartesian_coordinates</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span> <span class="o">=</span> <span class="n">GasPowerSimulator</span><span class="p">(</span><span class="n">time_range</span><span class="p">)</span>
-        <span class="n">simulation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_simulation</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">power_output</span><span class="p">()</span></div>
+</div>
 
+        
 </pre></div>
         </article>
       </div>
@@ -497,7 +502,7 @@
         <div class="bottom-of-page">
           <div class="left-details">
             <div class="copyright">
-                Copyright &#169; 0, Michael Dodds, Oscar Hill, Stan Xio, Alex Higgins
+                Copyright &#169; 0, Michael Dodds, Oscar Hill, Stan Xio, Alex Higginbottom
             </div>
             Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
             

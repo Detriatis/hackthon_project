@@ -2,12 +2,12 @@
 ===============
 
 .. automodule:: graph_elements
-
+  
    
    
    
 
-   
+
    
    
 
@@ -25,6 +25,7 @@
 
 .. autosummary::
    :toctree:
+   :template: custom-module-template.rst
    :recursive:
 
    graph_elements.connections
