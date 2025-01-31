@@ -5,10 +5,11 @@ from graph_solver.graph_solver import GraphSolver
 
 
 def main():
-    source_solar = Solar('solar1', 24, [0, 1]) 
-    source_wind = Wind('wind1', 24, [1, 0], offshore=True)
-    source_gas = Gas('gas1', 24, [1, 1])
-    sink = SinkNode('city1', 24, [0, 0], 10) 
+    T = 5
+    source_solar = Solar('solar1', T, [0, 1])
+    source_wind = Wind('wind1', T, [1, 0], offshore=True)
+    source_gas = Gas('gas1', T, [1, 1])
+    sink = SinkNode('city1', T, [0, 0], 10) 
     graph = Graph(directed=True)
     
     # Adding a node to the graph, nodes are stored as key value pairs, where the
@@ -44,7 +45,7 @@ def main():
             
     assert len(power_series) == len(demand_series)
 
-    solver = GraphSolver(graph)
+    solver = GraphSolver(graph, T=T)
     power_allocations, _ = solver.solve()
     print(f"Power allocations: {power_allocations}")
     
