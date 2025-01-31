@@ -85,9 +85,9 @@ class WindPowerSimulator(SimulatorBase):
         if self.offshore:
             title = f'Hourly Power Output for {self.num_turbines} Turbine Offshore Farm'
             label = 'Predicted windpower'
-            self.plot_power_data(title, label, savepath)
+            # self.plot_power_data(title, label, savepath)
         else:
             title = f'Hourly Power Output for {self.num_turbines} Turbine Onshore Wind Farms'
             label = 'Predicted windpower'
-            self.plot_power_data(title, label, savepath)
+            # self.plot_power_data(title, label, savepath)
         

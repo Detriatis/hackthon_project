@@ -65,7 +65,7 @@ class Graph:
 
     def get_sinks(self): 
         sink_nodes = [] 
-        for node in self.nodes: 
+        for node in self.nodes.values():
             if isinstance(node, SinkNode):
                 sink_nodes.append(node)
 
@@ -73,7 +73,7 @@ class Graph:
 
     def get_sources(self): 
         source_nodes = []
-        for node in self.nodes: 
+        for node in self.nodes.values(): 
             if isinstance(node, SourceNode):
                 source_nodes.append(node) 
 

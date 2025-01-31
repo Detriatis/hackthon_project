@@ -51,7 +51,7 @@ class GasPowerSimulator(SimulatorBase):
         self.capital_cost = capital_cost
         self.cost_outputs = cost_outputs
         self.peak_power = peak_power
-        self.plot_data()
+        # self.plot_data()
     
     def plot_data(self):
         """

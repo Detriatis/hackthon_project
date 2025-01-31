@@ -70,5 +70,5 @@ class SolarPowerSimulator(SimulatorBase):
         savepath = '../../data/figures/solarpower.png'
         title = f'Hourly Power Output for {self.num_panels} Panel Solar Farm'
         label = 'Hourly power output for panel solar farm'
-        self.plot_power_data(title=title, label=label, savepath=savepath)
+        # self.plot_power_data(title=title, label=label, savepath=savepath)
 

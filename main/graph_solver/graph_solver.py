@@ -8,7 +8,7 @@ import numpy as np
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class GraphSolver:
-    def __init__(self, graph: Graph, T=3, epochs=1000, lambda_n=100):
+    def __init__(self, graph: Graph, T=24, epochs=1000, lambda_n=100):
         self.graph: Graph = graph
         self.epochs = epochs
 
@@ -18,7 +18,7 @@ class GraphSolver:
         self.S = len(self.sources)
         self.D = len(self.sinks)
         self.T = T
-        self.matrix_distance = np.zeros((self.S, self.D))
+        self.matrix_distance = torch.zeros((self.S, self.D))
 
         for source_idx, source in enumerate(self.sources):
             for sink_idx, sink in enumerate(self.sinks): 
@@ -38,7 +38,7 @@ class GraphSolver:
         self.connectivity_mask_3d = self.connectivity_mask.unsqueeze(-1).expand(self.S, self.D, self.T)
 
         # 5) Read node data from the graph (example)
-        self._build_node_tensors(graph)
+        self._build_node_tensors()
 
         # 6) Define optimizer *directly on matrix_power_allocation*
         self.optimizer = optim.Adam([self.matrix_power_allocation], lr=0.02)
@@ -57,8 +57,8 @@ class GraphSolver:
         self.list_demand_profile = []
         
         for source in self.sources:
-            self.list_total_power.append(source.total_power)
-            self.list_lcoe.append(source.lcoe)
+            self.list_total_power.append(source.get_power_output_series())
+            self.list_lcoe.append(source.get_lcoe_output_series())
 
         for sink in self.sinks:
             self.list_econ_coefficient.append(sink.econ_coefficient)
