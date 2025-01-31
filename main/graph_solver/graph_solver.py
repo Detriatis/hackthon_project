@@ -45,7 +45,7 @@ class GraphSolver:
         self._build_node_tensors()
 
         # 6) Define optimizer *directly on matrix_power_allocation*
-        self.optimizer = optim.Adam([self.matrix_power_allocation], lr=1)
+        self.optimizer = optim.Adam([self.matrix_power_allocation], lr=1000)
         self.losses = []
 
         # 7) define hyperparameters
@@ -70,49 +70,27 @@ class GraphSolver:
         self.list_lcoe       = torch.tensor(self.list_lcoe,       dtype=torch.float)
         self.list_econ_coefficient = torch.tensor(self.list_econ_coefficient, dtype=torch.float)
         self.list_demand_profile   = torch.tensor(self.list_demand_profile,   dtype=torch.float)
-   
-        print('total power', self.list_total_power)
-        print('list lcoe', self.list_lcoe)
-        print('list econ coef', self.list_econ_coefficient)
-        print('demand profile', self.list_demand_profile)
         
     def solve(self):    
         for epoch in range(self.epochs):
             self.optimizer.zero_grad()
-
-            # ----- Mask out invalid edges -----
-            # Option A) Force them to zero so they don't contribute to cost
-            # Option B) Multiply in the forward pass
             power_allocation_valid = torch.nn.ReLU()(self.matrix_power_allocation) * self.connectivity_mask_3d
-            print(f"power_allocation_valid: {power_allocation_valid}")
 
-            # 1) Received power at each sink over T
-            #    distance is shape (S, D), so we expand to (S, D, T)
             dist_3d = self.matrix_distance.unsqueeze(-1).expand(self.S, self.D, self.T)
-            received_power = (power_allocation_valid * dist_3d).sum(dim=0)  # shape (D, T)
+            received_power = (power_allocation_valid * dist_3d).sum(dim=0) 
 
-            # 2) Unmet demand
-            U = self.list_demand_profile - received_power  # shape (D, T)
-            print('Unmet', U)
-            # 3) Objective J
-            # cost_term for sources
-            cost_term = (self.list_lcoe * power_allocation_valid.sum(dim=1)).sum()
-            cost_term = torch.nn.ReLU()(cost_term)
-            # econ_term for sinks
-            econ_term = 1000 * self.list_econ_coefficient[:, None] * torch.nn.ReLU()(U)                     # shape (D, T)
+            U = self.list_demand_profile - received_power 
+            cost_term = (self.list_lcoe * torch.relu(power_allocation_valid.sum(dim=1))).sum()
+            
+            econ_term = self.list_econ_coefficient[:, None] * torch.nn.ReLU()(U)
             J = torch.sum(econ_term) + torch.sum(cost_term)
 
 
-            # 4) Constraint penalties
-            # supply violation: sum across D, T for each source -> compare to total_power
-            supply_violations = power_allocation_valid.sum(dim=1) - self.list_total_power
-            print(f"Supply_violations: {supply_violations}")
-            print(f"list_total_power: {self.list_total_power / power_allocation_valid.sum(dim=1) }")
-            L_supply = self.lambda_n * torch.sum(torch.relu(supply_violations)**2)
-            # non-negativity penalty (on power_allocation + on U if we don't want negative U)
-            L_neg = self.lambda_n * torch.sum(torch.relu(-power_allocation_valid)**2 + torch.relu(-U)**2)
+            supply_violations = self.lambda_n * (power_allocation_valid.sum(dim=1) - self.list_total_power)
+            L_supply = torch.sum(torch.relu(supply_violations))
 
-            L_total = J + L_supply + L_neg
+
+            L_total = J + L_supply
             L_total.backward()
 
             self.optimizer.step()
@@ -120,5 +98,6 @@ class GraphSolver:
 
             if epoch % 200 == 0:
                 print(f"Epoch {epoch}, Loss: {L_total.item():.4f}")
+                print()
 
         return torch.nn.ReLU()(self.matrix_power_allocation).detach(), self.losses
