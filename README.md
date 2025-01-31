@@ -34,7 +34,6 @@ For easier understanding, an example of the mathematical formulation of 2 x 2 ca
 ## Mathematical Formulation (2x2 Case)
 
 
-![2 by 2 Diagram](visuals/2by2.png)
 
 The optimization problem for a **two-sources, two-sinks** scenario is formulated as follows:
 
