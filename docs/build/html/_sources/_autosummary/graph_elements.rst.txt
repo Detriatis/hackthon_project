@@ -30,5 +30,7 @@
 
    graph_elements.connections
    graph_elements.graph
+   graph_elements.graph_generator
+   graph_elements.node_generator
    graph_elements.nodes
 

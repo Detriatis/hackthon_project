@@ -1,6 +1,6 @@
 """
 source_simulators.py
-===================
+=====================
 
 This module contains classes for simulating different types of power generators:
 solar, gas, and wind. Each class inherits from a common base class, 

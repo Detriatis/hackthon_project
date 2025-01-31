@@ -15,6 +15,7 @@ simulations.simulator\_base.SimulatorBase
    
       ~SimulatorBase.__init__
       ~SimulatorBase.get_cost_at_index
+      ~SimulatorBase.get_costs
       ~SimulatorBase.get_power_at_index
       ~SimulatorBase.get_power_demand_at_index
       ~SimulatorBase.plot_power_data

@@ -24,6 +24,8 @@ extensions = [
     'sphinx.ext.napoleon',     # For NumPy & Google style docstrings
     'sphinx.ext.viewcode',     # Add "view code" links to doc pages
     'sphinx.ext.autosummary', # Optional: generate summary docs
+    'sphinx.ext.mathjax',
+    'myst_parser'
 ]
 autosummary_generate = True 
 # Napoleon settings (optional, defaults are generally good)

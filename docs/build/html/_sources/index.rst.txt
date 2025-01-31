@@ -5,11 +5,18 @@
 
 Welcome to the Hackathon Project documentation!
 ===============================================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   introduction
+
 .. autosummary:: 
    :toctree: _autosummary
    :template: custom-module-template.rst
    :recursive:
-
+    
    graph_elements
    graph_solver
    simulations
