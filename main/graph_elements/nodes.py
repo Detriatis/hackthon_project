@@ -3,11 +3,9 @@ This module contains various node definitions for an energy network.
 """
 import numpy as np 
 from abc import abstractmethod
-from simulations.gas import GasPowerSimulator
-from simulations.solar import SolarPowerSimulator
-from simulations.wind import WindPowerSimulator
 from simulations.simulator_base import SimulatorBase
-from simulations.sink_demand import SinkPowerDemandSimulator
+from simulations.source_simulators import GasPowerSimulator, WindPowerSimulator, SolarPowerSimulator
+from main.simulations.sink_simulators import CityPowerDemandSimulator
 
 class Node:
     """
@@ -71,7 +69,7 @@ class SinkNode(Node):
 
     def __init__(self, node_id, time_range, cartesian_coordinates, econ_coefficient):
         super().__init__(node_id, time_range, cartesian_coordinates)
-        self.simulator = SinkPowerDemandSimulator(time_range)
+        self.simulator = CityPowerDemandSimulator(time_range)
         self.simulator.power_demand()
         self.econ_coefficient = econ_coefficient
         self.demand_profile = self.get_demand_series()
@@ -198,4 +196,3 @@ class Gas(SourceNode):
         super().__init__(name, time_range, cartesian_coordinates)
         self.simulator = GasPowerSimulator(time_range)
         self.simulator.power_output()
-        
