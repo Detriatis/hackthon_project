@@ -90,7 +90,7 @@ class GraphSolver:
 
             # 3) Objective J
             # cost_term for sources
-            cost_term = self.list_lcoe[:, None] * power_allocation_valid.sum(dim=1)  # shape (S, T)
+            cost_term = (self.list_lcoe * power_allocation_valid.sum(dim=1)).sum()
             # econ_term for sinks
             econ_term = self.list_econ_coefficient[:, None] * torch.nn.ReLU()(U)                     # shape (D, T)
             J = torch.sum(econ_term) + torch.sum(cost_term)
