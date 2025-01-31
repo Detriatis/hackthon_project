@@ -1,5 +1,7 @@
 # Power Supply Network Optimization
 
+## Alex Higginbottom, Oscar Hill, Michael Dodds, Hanlin Xiao
+
 # Guide to the code
 
 ## Installation
