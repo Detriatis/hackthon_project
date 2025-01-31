@@ -1,8 +1,26 @@
-### Mathematical Formulation (2x2 Case)
+# Power Supply Network Optimization
+
+## Introduction
+
+This project focuses on optimizing a power supply network between power sources and sinks. In reality, the connections between power plants and cities can be represented as a network, where edges denote the transmission routes of electricity.
+
+A simplified model considers power plants as **sources** and cities as **sinks**, with transmission lines forming the network structure. The objective is to optimize the distribution of power to improve efficiency, minimize losses, and ensure stability.
+
+---
+
+## Dynamic Pricing and Supply Optimization
+
+In real-world scenarios, the cost of power generation varies throughout the day for some energy sources. For example, **solar power** has a peak generation at noon but produces no power at midnight. If a city is connected to multiple sources, the optimization problem involves dynamically selecting the best energy supplier based on **time-dependent pricing**.
+
+Additionally, the model incorporates **economic costs associated with insufficient power supply**. This introduces a trade-off between **minimizing supply costs** and **mitigating economic losses due to power shortages**.
+
+---
+
+## Mathematical Formulation (2x2 Case)
 
 The optimization problem for a **two-sources, two-sinks** scenario is formulated as follows:
 
-#### **Power Constraints**
+### **Power Constraints**
 Each city's power demand must be met either through supplied power or be counted as unsatisfied demand:
 
 $$
@@ -33,7 +51,7 @@ Where $P_{iT}(t)$ is the total power capacity of source $i$ at time $t$.
 
 ---
 
-#### **Cost Function**
+### **Cost Function**
 The total cost to be minimized consists of two parts:
 1. **Power generation cost:** Depends on the dynamically changing cost per unit power.
 2. **Economic loss cost:** Associated with the unsatisfied demand.
@@ -54,7 +72,8 @@ $$
 
 ---
 
-### **Gradient Descent Formulation**
+## Gradient Descent Formulation
+
 Instead of solving a linear system directly, we reformulate this as a **gradient descent optimization** problem to improve scalability.
 
 The final objective function includes:
@@ -67,7 +86,8 @@ The gradient descent update steps iteratively adjust $P_{ij}(t)$ values to minim
 
 ---
 
-### **Example Network Representation**
+## Example Network Representation
+
 Below is an example representation of the **two-sources, two-sinks** network:
 
 ![Example Network Diagram](path/to/your/image.png)
