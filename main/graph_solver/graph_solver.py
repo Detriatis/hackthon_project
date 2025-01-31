@@ -2,26 +2,29 @@ import torch.optim as optim
 import matplotlib.pyplot as plt
 import torch
 from graph_elements.nodes import Node, SourceNode, SinkNode
-from graph_elements.graph import Graph 
+from graph_elements.graph import Graph
+import numpy as np
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
 
 class GraphSolver:
     def __init__(self, graph: Graph, T=3, epochs=1000, lambda_n=100):
         self.graph: Graph = graph
         self.epochs = epochs
 
-        #### TODO this is incorrect: The shape is actually (S + D, S + D) as we made the assumption
-        #### That all nodes could, in theory, connect to any other node. So either we need to change
-        #### the construct adjacency function or the shape this code expects
-        # 1) Construct adjacency
-        adj, _ = self.graph.construct_adjacency()  # shape (S, D)
-        self.matrix_distance = adj
-
+        self.sources = graph.get_sources()
+        self.sinks = graph.get_sinks()
         # 2) Prepare shapes
-        self.S, self.D = self.matrix_distance.shape
+        self.S = len(self.sources)
+        self.D = len(self.sinks)
         self.T = T
+        self.matrix_distance = np.zeros((self.S, self.D))
+
+        for source_idx, source in enumerate(self.sources):
+            for sink_idx, sink in enumerate(self.sinks): 
+                for connection in source.connections:
+                    if connection.node_b.node_id == sink.node_id:
+                        self.matrix_distance[source_idx][sink_idx] = connection.weight
 
         # 3) Instead of masked_select, create a full matrix_power_allocation as a leaf Parameter
         #    The entire (S, D, T) becomes trainable
@@ -53,13 +56,13 @@ class GraphSolver:
         self.list_econ_coefficient = []
         self.list_demand_profile = []
         
-        for node in self.graph.nodes.values():
-            if isinstance(node, SourceNode):
-                self.list_total_power.append(node.total_power)
-                self.list_lcoe.append(node.lcoe)
-            elif isinstance(node, SinkNode):
-                self.list_econ_coefficient.append(node.econ_coefficient)
-                self.list_demand_profile.append(node.demand_profile)
+        for source in self.sources:
+            self.list_total_power.append(source.total_power)
+            self.list_lcoe.append(source.lcoe)
+
+        for sink in self.sinks:
+            self.list_econ_coefficient.append(sink.econ_coefficient)
+            self.list_demand_profile.append(sink.demand_profile)
 
         self.list_total_power = torch.tensor(self.list_total_power, dtype=torch.float)
         self.list_lcoe       = torch.tensor(self.list_lcoe,       dtype=torch.float)

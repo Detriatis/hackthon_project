@@ -1,6 +1,7 @@
 from graph_elements.connections import Connection 
 from graph_elements.nodes import SourceNode, SinkNode, Solar, Wind, Gas, Node
 from graph_elements.graph import Graph
+from graph_solver.graph_solver import GraphSolver
 
 
 def main():
@@ -42,6 +43,10 @@ def main():
             print(node_id, demand_series)
             
     assert len(power_series) == len(demand_series)
+
+    solver = GraphSolver(graph)
+    power_allocations, _ = solver.solve()
+    print(f"Power allocations: {power_allocations}")
     
 if __name__ == '__main__': 
     main() 
